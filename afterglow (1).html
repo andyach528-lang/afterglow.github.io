@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AfterGlow — Messages Across Time</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF7F2;
+      --ink: #1A1208;
+      --gold: #B8935A;
+      --gold-light: #E8D5B0;
+      --warm: #F0E8D8;
+      --muted: #6B5B45;
+      --border: #D4C4A8;
+      --white: #FFFFFF;
+      --dark-border: #3A3020;
+      --dark-muted: #A89880;
+      --dark-hint: #5A4A35;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .mono { font-family: 'DM Mono', monospace; }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.8rem 5rem;
+      border-bottom: 0.5px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--cream);
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.65rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .btn-nav {
+      background: var(--ink) !important;
+      color: var(--cream) !important;
+      padding: 0.55rem 1.4rem;
+    }
+    .btn-nav:hover { opacity: 0.85; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--ink);
+      transition: all 0.3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 5rem 5rem 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -180px;
+      top: -180px;
+      width: 560px;
+      height: 560px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #E8D5B028 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      left: -100px;
+      bottom: -100px;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #B8935A0C 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-content { animation: fadein 0.9s ease both; }
+
+    .hero h1 {
+      font-size: 4.4rem;
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.015em;
+      margin-bottom: 1.8rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+
+    .hero-sub {
+      font-size: 1.22rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 0.85rem 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.82; }
+
+    .btn-secondary {
+      color: var(--ink);
+      padding: 0.85rem 1.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      border: 0.5px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--ink); }
+
+    .tag-pills { margin-top: 2.4rem; }
+    .tag-pill {
+      display: inline-flex;
+      background: var(--warm);
+      border: 0.5px solid var(--border);
+      padding: 0.3rem 0.85rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── ENVELOPE SCENE ── */
+    .envelope-scene {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 480px;
+      animation: fadein 1s ease 0.25s both;
+    }
+
+    .envelope {
+      width: 350px;
+      height: 230px;
+      background: var(--warm);
+      border: 0.5px solid var(--border);
+      position: relative;
+      box-shadow: 0 24px 64px rgba(26,18,8,0.1), 0 4px 16px rgba(26,18,8,0.06);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 130px;
+      background: #EDE3D0;
+      border-bottom: 0.5px solid var(--border);
+      clip-path: polygon(0 0, 50% 72%, 100% 0);
+      z-index: 2;
+    }
+
+    .envelope-seal {
+      position: absolute;
+      top: 54px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      height: 38px;
+      background: var(--gold);
+      border-radius: 50%;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .seal-inner {
+      width: 22px;
+      height: 22px;
+      background: var(--cream);
+      border-radius: 50%;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .envelope-body {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 36px;
+    }
+
+    .letter-peek {
+      background: white;
+      width: 270px;
+      height: 148px;
+      border: 0.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.2rem 1.4rem;
+      gap: 7px;
+      transform: rotate(-1.5deg);
+      box-shadow: 0 2px 12px rgba(26,18,8,0.06);
+    }
+    .letter-line { height: 1px; background: #E8E0D4; }
+    .letter-line.short { width: 55%; }
+    .letter-line.med { width: 78%; }
+    .letter-highlight { height: 2px; background: var(--gold-light); width: 38%; }
+
+    .float-tag {
+      position: absolute;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      background: var(--cream);
+      border: 0.5px solid var(--border);
+      padding: 0.4rem 0.85rem;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(26,18,8,0.05);
+    }
+    .tag-1 { top: 48px; right: 12px; animation: float 7s ease-in-out 0.5s infinite; }
+    .tag-2 { bottom: 56px; left: 4px; animation: float 8s ease-in-out 1s infinite; }
+    .tag-3 { top: 128px; left: -16px; animation: float 6.5s ease-in-out 0.2s infinite; }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 6rem 5rem;
+    }
+
+    .how .section-label { color: var(--gold); }
+
+    .how h2 {
+      font-size: 3rem;
+      font-weight: 300;
+      margin-bottom: 4rem;
+      line-height: 1.18;
+    }
+
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem; }
+
+    .step { border-top: 0.5px solid var(--dark-border); padding-top: 1.6rem; }
+
+    .step-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--gold);
+      letter-spacing: 0.14em;
+      margin-bottom: 0.9rem;
+    }
+
+    .step-title {
+      font-size: 1.3rem;
+      font-weight: 300;
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .step-desc {
+      font-size: 0.95rem;
+      color: var(--dark-muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── WHAT TO SEND ── */
+    .what {
+      padding: 6rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .what-left h2 {
+      font-size: 2.8rem;
+      font-weight: 300;
+      line-height: 1.18;
+      margin-bottom: 1.5rem;
+    }
+
+    .what-left p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 1.8rem 0;
+    }
+
+    .what-right { display: grid; gap: 1rem; }
+
+    .item-card {
+      border: 0.5px solid var(--border);
+      padding: 1.4rem 1.7rem;
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .item-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 20px rgba(184,147,90,0.08);
+    }
+
+    .ic-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .ic-name { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.3rem; }
+    .ic-desc {
+      font-size: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── ESTIMATOR ── */
+    .estimator {
+      background: var(--warm);
+      padding: 6rem 5rem;
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .estimator h2 {
+      font-size: 2.7rem;
+      font-weight: 300;
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+    .estimator .sub-text {
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 3rem;
+    }
+
+    .pricing-factors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+
+    .pf {
+      background: var(--cream);
+      border: 0.5px solid var(--border);
+      padding: 1.6rem;
+      transition: border-color 0.2s;
+    }
+    .pf:hover { border-color: var(--gold); }
+
+    .pf-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+    .pf-title { font-size: 1.15rem; font-weight: 400; margin-bottom: 0.4rem; }
+    .pf-eg { font-size: 0.85rem; color: var(--muted); font-weight: 300; }
+
+    /* Cost Estimator Widget */
+    .calc-box {
+      background: var(--cream);
+      border: 0.5px solid var(--border);
+      padding: 2.5rem;
+      max-width: 780px;
+    }
+
+    .calc-box h3 {
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-bottom: 1.8rem; }
+
+    .calc-field label {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .calc-field select,
+    .calc-field input {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 0.5px solid var(--border);
+      background: var(--white);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      appearance: none;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .calc-field select:focus,
+    .calc-field input:focus { border-color: var(--gold); }
+
+    .calc-result {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 1.4rem 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+
+    .calc-result .result-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--dark-muted);
+    }
+    .calc-result .result-price {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+    .calc-result .result-note {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--dark-hint);
+      margin-top: 0.25rem;
+    }
+
+    /* ── TRUST ── */
+    .trust {
+      padding: 6rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7rem;
+      align-items: center;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .trust-left blockquote {
+      font-size: 1.85rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.55;
+      margin-bottom: 1.6rem;
+      color: var(--ink);
+    }
+
+    .trust-left cite {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      font-style: normal;
+    }
+
+    .trust-right { display: flex; flex-direction: column; gap: 1.8rem; }
+
+    .trust-stat { border-left: 2px solid var(--gold); padding-left: 1.6rem; }
+    .ts-num { font-size: 2.2rem; font-weight: 300; }
+    .ts-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.07em;
+      margin-top: 0.15rem;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials {
+      background: var(--ink);
+      padding: 6rem 5rem;
+      border-top: 0.5px solid var(--dark-border);
+    }
+
+    .testimonials .section-label { color: var(--gold); }
+
+    .testimonials h2 {
+      font-size: 2.6rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 3.5rem;
+      line-height: 1.2;
+    }
+
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
+    .testi-card {
+      border: 0.5px solid var(--dark-border);
+      padding: 2rem;
+    }
+
+    .testi-text {
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .testi-author {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--dark-muted);
+    }
+
+    .testi-star {
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+
+    /* ── FAQ ── */
+    .faq {
+      padding: 6rem 5rem;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .faq-inner { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; align-items: start; }
+
+    .faq-left h2 {
+      font-size: 2.6rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .faq-left p { font-size: 1rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+    .faq-list { display: flex; flex-direction: column; }
+
+    .faq-item {
+      border-bottom: 0.5px solid var(--border);
+      padding: 1.4rem 0;
+    }
+
+    .faq-q {
+      font-size: 1.1rem;
+      font-weight: 400;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      user-select: none;
+    }
+
+    .faq-q::after {
+      content: '+';
+      font-family: 'DM Mono', monospace;
+      font-size: 1.2rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+
+    .faq-a {
+      font-size: 0.98rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.75;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      padding-top: 0.9rem;
+    }
+
+    /* ── CTA ── */
+    .cta {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 7rem 5rem;
+      text-align: center;
+      border-top: 0.5px solid var(--dark-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #B8935A08 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cta h2 {
+      font-size: 3.4rem;
+      font-weight: 300;
+      line-height: 1.18;
+      margin-bottom: 1.2rem;
+    }
+    .cta h2 em { font-style: italic; color: var(--gold); }
+
+    .cta p {
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--dark-muted);
+      margin-bottom: 2.8rem;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.75;
+    }
+
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+      padding: 0.9rem 2.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .btn-gold:hover { opacity: 0.88; }
+
+    .cta-note {
+      margin-top: 2.2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      color: var(--dark-hint);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 5rem;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .logo {
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .footer-brand p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .footer-col a {
+      font-size: 0.92rem;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 0.5px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-bottom p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26,18,8,0.7);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+
+    .modal {
+      background: var(--cream);
+      padding: 3rem;
+      max-width: 560px;
+      width: 90%;
+      position: relative;
+      animation: fadein 0.3s ease;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.4rem;
+      background: none;
+      border: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .modal h3 {
+      font-size: 1.7rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    .modal .modal-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 2rem;
+    }
+
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border: 0.5px solid var(--border);
+      background: var(--white);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      nav { padding: 1.5rem 2.5rem; }
+      .hero { padding: 3.5rem 2.5rem; gap: 2.5rem; }
+      .hero h1 { font-size: 3.4rem; }
+      .how, .what, .trust, .faq, .cta, footer { padding-left: 2.5rem; padding-right: 2.5rem; }
+      .estimator { padding-left: 2.5rem; padding-right: 2.5rem; }
+      .testimonials { padding-left: 2.5rem; padding-right: 2.5rem; }
+      .steps { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: var(--cream);
+        border-bottom: 0.5px solid var(--border);
+        padding: 1.5rem 2rem;
+        gap: 1.2rem;
+        z-index: 99;
+      }
+      .nav-hamburger { display: flex; }
+      nav { position: relative; }
+
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.8rem; min-height: auto; }
+      .envelope-scene { height: 320px; }
+      .envelope { width: 260px; height: 170px; }
+      .letter-peek { width: 200px; height: 110px; }
+      .hero h1 { font-size: 2.8rem; }
+
+      .how { padding: 4rem 1.8rem; }
+      .how h2 { font-size: 2.2rem; }
+      .steps { grid-template-columns: 1fr; gap: 2rem; }
+
+      .what { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.8rem; }
+      .what-left h2 { font-size: 2.2rem; }
+
+      .estimator { padding: 4rem 1.8rem; }
+      .estimator h2 { font-size: 2.2rem; }
+      .pricing-factors { grid-template-columns: 1fr; }
+      .calc-grid { grid-template-columns: 1fr; }
+
+      .trust { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.8rem; }
+      .trust-left blockquote { font-size: 1.5rem; }
+
+      .testimonials { padding: 4rem 1.8rem; }
+      .testimonials h2 { font-size: 2.2rem; }
+      .testi-grid { grid-template-columns: 1fr; }
+
+      .faq { padding: 4rem 1.8rem; }
+      .faq-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      .cta { padding: 5rem 1.8rem; }
+      .cta h2 { font-size: 2.5rem; }
+
+      footer { padding: 3rem 1.8rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="logo">After<span>Glow</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#what">What to send</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#" class="btn-nav" onclick="openModal()">Begin a legacy</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="section-label">✦ Messages across time</div>
+    <h1>Your love,<br/><em>delivered</em><br/>when it matters.</h1>
+    <p class="hero-sub">Schedule letters, gifts, and memories to reach your loved ones — days, months, or years from now. A piece of you, forever present.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openModal()">Create your first message</button>
+      <button class="btn-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See how it works →</button>
+    </div>
+    <div class="tag-pills">
+      <span class="tag-pill">Letters &amp; cards</span>
+      <span class="tag-pill">Physical gifts</span>
+      <span class="tag-pill">Video messages</span>
+      <span class="tag-pill">Voice recordings</span>
+      <span class="tag-pill">Photo albums</span>
+    </div>
+  </div>
+
+  <div class="envelope-scene">
+    <div class="envelope">
+      <div class="envelope-flap"></div>
+      <div class="envelope-seal">
+        <div class="seal-inner">AG</div>
+      </div>
+      <div class="envelope-body">
+        <div class="letter-peek">
+          <div class="letter-line short"></div>
+          <div class="letter-highlight"></div>
+          <div class="letter-line med"></div>
+          <div class="letter-line"></div>
+          <div class="letter-line short"></div>
+          <div class="letter-line med"></div>
+          <div class="letter-line" style="width:30%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="float-tag tag-1 mono">Deliver: 2031-06-04</div>
+    <div class="float-tag tag-2 mono">To: Priya ♡</div>
+    <div class="float-tag tag-3 mono">On her graduation</div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how" id="how">
+  <div class="section-label">✦ The process</div>
+  <h2>Simple to give.<br/>Eternal to receive.</h2>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01 — Compose</div>
+      <div class="step-title">Write your message or choose a gift</div>
+      <div class="step-desc">A handwritten letter, a physical keepsake, a voice message, a photo album. Choose what your heart wants to send forward in time.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">02 — Address</div>
+      <div class="step-title">Tell us who receives it</div>
+      <div class="step-desc">Name your recipient and provide their details. Add a note about who they are to you — it helps us care for your message with the love it deserves.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03 — Schedule</div>
+      <div class="step-title">Choose the moment of delivery</div>
+      <div class="step-desc">A specific date, a milestone anniversary, a birthday far away — or "when I'm gone." You decide the moment. We honour it exactly as you intended.</div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">04 — Rest</div>
+      <div class="step-title">We keep it safe until that day</div>
+      <div class="step-desc">Your message is stored securely in climate-controlled facilities, handled with care, and delivered without fail — on the exact day you chose.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT TO SEND ── -->
+<section class="what" id="what">
+  <div class="what-left reveal">
+    <div class="section-label">✦ What you can send</div>
+    <h2>Anything that holds a piece of you.</h2>
+    <div class="divider"></div>
+    <p>Love doesn't need a body to travel. We carry physical objects, written words, and recorded voices across time — delivered with the care they deserve.</p>
+    <p>Whether it's a grandmother's recipe written in her own hand, a father's advice for a child not yet born, or a spouse's love letter for a future anniversary — every message has a home here.</p>
+    <p>You think of the meaning. We take care of the rest.</p>
+  </div>
+  <div class="what-right">
+    <div class="item-card reveal">
+      <div class="ic-icon">✉</div>
+      <div class="ic-name">Handwritten letters &amp; cards</div>
+      <div class="ic-desc">Digitally archived + physical delivery in original form</div>
+    </div>
+    <div class="item-card reveal">
+      <div class="ic-icon">◈</div>
+      <div class="ic-name">Gifts &amp; keepsakes</div>
+      <div class="ic-desc">Jewellery, books, small objects — stored &amp; shipped with care</div>
+    </div>
+    <div class="item-card reveal">
+      <div class="ic-icon">◉</div>
+      <div class="ic-name">Video &amp; voice messages</div>
+      <div class="ic-desc">Securely encrypted, shared privately at the right time</div>
+    </div>
+    <div class="item-card reveal">
+      <div class="ic-icon">◫</div>
+      <div class="ic-name">Photo collections</div>
+      <div class="ic-desc">Printed albums or curated digital galleries, your choice</div>
+    </div>
+    <div class="item-card reveal">
+      <div class="ic-icon">◻</div>
+      <div class="ic-name">Legacy boxes</div>
+      <div class="ic-desc">Curated collections of multiple items delivered together</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ESTIMATOR ── -->
+<section class="estimator" id="pricing">
+  <div class="section-label">✦ Honest pricing</div>
+  <h2 class="reveal">You pay for what you send,<br/>and how long we hold it.</h2>
+  <p class="sub-text reveal">No subscriptions. No surprises. Cost is calculated on three transparent factors.</p>
+
+  <div class="pricing-factors">
+    <div class="pf reveal">
+      <div class="pf-label">Factor 01</div>
+      <div class="pf-title">What you send</div>
+      <div class="pf-eg">A letter costs less to store than a gift box. Digital-only costs the least.</div>
+    </div>
+    <div class="pf reveal">
+      <div class="pf-label">Factor 02</div>
+      <div class="pf-title">Storage duration</div>
+      <div class="pf-eg">Holding something for 20 years costs more than 2. We charge fairly for that time.</div>
+    </div>
+    <div class="pf reveal">
+      <div class="pf-label">Factor 03</div>
+      <div class="pf-title">Delivery location</div>
+      <div class="pf-eg">Local, national, or international delivery — each priced accurately at time of scheduling.</div>
+    </div>
+  </div>
+
+  <div class="calc-box reveal">
+    <h3>Quick cost estimator</h3>
+    <div class="calc-grid">
+      <div class="calc-field">
+        <label>What are you sending?</label>
+        <select id="itemType" onchange="updateEstimate()">
+          <option value="letter">Letter or card</option>
+          <option value="digital">Digital message / video</option>
+          <option value="small-gift">Small gift or keepsake</option>
+          <option value="large-gift">Large gift or legacy box</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label>Delivery location</label>
+        <select id="location" onchange="updateEstimate()">
+          <option value="local">Same city</option>
+          <option value="national">Within India</option>
+          <option value="international">International</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label>Deliver in how many years?</label>
+        <input type="number" id="years" min="1" max="50" value="5" onchange="updateEstimate()" oninput="updateEstimate()" />
+      </div>
+      <div class="calc-field">
+        <label>Number of recipients</label>
+        <input type="number" id="recipients" min="1" max="20" value="1" onchange="updateEstimate()" oninput="updateEstimate()" />
+      </div>
+    </div>
+    <div class="calc-result">
+      <div>
+        <div class="result-label">Estimated total cost</div>
+        <div class="result-price" id="estimatePrice">₹ 2,400</div>
+        <div class="result-note">Includes storage, handling &amp; delivery. Paid once upfront.</div>
+      </div>
+      <button class="btn-gold" onclick="openModal()">Begin for this price →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRUST ── -->
+<section class="trust">
+  <div class="trust-left reveal">
+    <blockquote>"The greatest gift you can give someone is a piece of yourself they can hold long after you're gone."</blockquote>
+    <cite>— The belief behind AfterGlow</cite>
+  </div>
+  <div class="trust-right">
+    <div class="trust-stat reveal">
+      <div class="ts-num">100%</div>
+      <div class="ts-label">Delivery guarantee or full refund</div>
+    </div>
+    <div class="trust-stat reveal">
+      <div class="ts-num">Climate-safe</div>
+      <div class="ts-label">Long-term archival storage facilities</div>
+    </div>
+    <div class="trust-stat reveal">
+      <div class="ts-num">End-to-end encrypted</div>
+      <div class="ts-label">Digital content protection</div>
+    </div>
+    <div class="trust-stat reveal">
+      <div class="ts-num">Estate-ready</div>
+      <div class="ts-label">Legal trigger options — deliver upon passing</div>
+    </div>
+    <div class="trust-stat reveal">
+      <div class="ts-num">Up to 50 years</div>
+      <div class="ts-label">Maximum scheduled delivery window</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials">
+  <div class="section-label">✦ Stories</div>
+  <h2 class="reveal">Messages that found their moment.</h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-star">★ ★ ★ ★ ★</div>
+      <p class="testi-text">"My father set up a letter for my wedding day — three years before he passed. When it arrived, it felt like he was right there in the room."</p>
+      <div class="testi-author">Meera S. — Mumbai</div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-star">★ ★ ★ ★ ★</div>
+      <p class="testi-text">"I scheduled voice messages for each of my children's 18th birthdays. Knowing they'll hear my voice on that day gives me a peace I can't describe."</p>
+      <div class="testi-author">Rajiv K. — Bengaluru</div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-star">★ ★ ★ ★ ★</div>
+      <p class="testi-text">"My grandmother's handwritten recipe arrived on what would have been her 100th birthday. Our whole family cooked it together that evening."</p>
+      <div class="testi-author">Anika P. — Delhi</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <div class="faq-left reveal">
+      <div class="section-label">✦ Questions</div>
+      <h2>Everything you need to know.</h2>
+      <div class="divider"></div>
+      <p>Choosing to send something across time is a big decision. We want you to feel completely certain before you do.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What happens to my message if AfterGlow closes down?</div>
+        <div class="faq-a">We hold all funds in a protected escrow account and work with a legal trustee. In the unlikely event we cease operations, your messages and funds are transferred to a designated partner service, and every recipient is notified. Your delivery will happen.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I edit or cancel a scheduled message?</div>
+        <div class="faq-a">Yes — you can update the recipient's details, delivery date, or message content at any time up to 30 days before the scheduled delivery. Cancellations made more than 90 days before delivery receive a full refund.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How do you handle "deliver when I'm gone" messages?</div>
+        <div class="faq-a">You designate a trusted notifier — a family member, lawyer, or executor — who contacts us when you pass. We can also integrate with estate legal processes. Once we receive verified confirmation, delivery is triggered within 30 days.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How are physical items stored?</div>
+        <div class="faq-a">All physical items are stored in climate-controlled, humidity-regulated archival facilities. Fragile items are wrapped in acid-free materials. We photograph and digitally catalogue everything upon receipt so you have a permanent record.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What if the recipient has moved or can't be reached?</div>
+        <div class="faq-a">We hold undeliverable items for up to 5 years and make three independent attempts to locate recipients. You can also provide alternate contact details. We never discard a message — we hold it until it finds its home.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is my content private?</div>
+        <div class="faq-a">Completely. Digital content is end-to-end encrypted and only decrypted at the moment of delivery. Physical items are sealed and handled only by gloved staff. No one at AfterGlow reads your letters or views your videos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta">
+  <h2>Leave a light<br/>they can <em>always</em> return to.</h2>
+  <p>Your presence doesn't end. With AfterGlow, the people you love will know — across any distance, across any time — that you thought of them.</p>
+  <div class="cta-btns">
+    <button class="btn-gold" onclick="openModal()">Begin your first message</button>
+    <button class="btn-secondary" style="border-color:#3A3020;color:#A89880" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">Learn more</button>
+  </div>
+  <p class="cta-note">No account needed to start · Save and complete when you're ready · Cancel anytime</p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo">After<span>Glow</span></a>
+      <p>Carrying love across time. We store your messages, gifts, and memories — and deliver them exactly when you intend.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#what">What to send</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#">Start a message</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">Our story</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Trust &amp; legal</h4>
+      <ul>
+        <li><a href="#">Privacy policy</a></li>
+        <li><a href="#">Terms of service</a></li>
+        <li><a href="#">Security</a></li>
+        <li><a href="#">Estate guide</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 AfterGlow · Mumbai, India</p>
+    <p>hello@afterglow.in · +91 98765 43210</p>
+    <p>Made with intention.</p>
+  </div>
+</footer>
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Begin your first message</h3>
+    <p class="modal-sub">Tell us a little about what you'd like to send. We'll be in touch within 24 hours.</p>
+    <div class="form-group">
+      <label>Your name</label>
+      <input type="text" placeholder="Your full name" />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Email address</label>
+        <input type="email" placeholder="you@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Phone number</label>
+        <input type="tel" placeholder="+91 ..." />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>What would you like to send?</label>
+      <select>
+        <option>Letter or card</option>
+        <option>Voice or video message</option>
+        <option>Physical gift or keepsake</option>
+        <option>Legacy box (multiple items)</option>
+        <option>Something else</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Anything you'd like us to know</label>
+      <textarea rows="3" placeholder="Tell us about the person, the occasion, the moment..."></textarea>
+    </div>
+    <button class="btn-primary" style="width:100%;padding:1rem;font-size:0.8rem" onclick="handleFormSubmit()">Send my enquiry →</button>
+  </div>
+</div>
+
+<script>
+  // ── NAV MOBILE ──
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // ── MODAL ──
+  function openModal() {
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+  function handleFormSubmit() {
+    const modal = document.querySelector('.modal');
+    modal.innerHTML = `
+      <div style="text-align:center;padding:2rem 0">
+        <div style="font-size:2.5rem;margin-bottom:1rem">✦</div>
+        <h3 style="margin-bottom:0.8rem">Thank you.</h3>
+        <p style="color:var(--muted);font-weight:300;line-height:1.7;font-size:1rem">Your message is with us. We'll reach out within 24 hours to help you begin.<br/><br/>Something beautiful is being set in motion.</p>
+        <button class="btn-primary" style="margin-top:2rem" onclick="closeModal()">Close</button>
+      </div>
+    `;
+  }
+
+  // ── FAQ ACCORDION ──
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const allItems = document.querySelectorAll('.faq-item');
+    allItems.forEach(i => { if (i !== item) i.classList.remove('open'); });
+    item.classList.toggle('open');
+  }
+
+  // ── COST ESTIMATOR ──
+  const BASE = { 'letter': 400, 'digital': 200, 'small-gift': 800, 'large-gift': 1800 };
+  const STORAGE_PER_YEAR = { 'letter': 80, 'digital': 30, 'small-gift': 180, 'large-gift': 380 };
+  const DELIVERY = { 'local': 150, 'national': 350, 'international': 1200 };
+
+  function updateEstimate() {
+    const type = document.getElementById('itemType').value;
+    const loc = document.getElementById('location').value;
+    const years = Math.max(1, Math.min(50, parseInt(document.getElementById('years').value) || 1));
+    const recipients = Math.max(1, Math.min(20, parseInt(document.getElementById('recipients').value) || 1));
+
+    const base = BASE[type] || 400;
+    const storage = (STORAGE_PER_YEAR[type] || 80) * years;
+    const delivery = DELIVERY[loc] || 150;
+    const total = (base + storage + delivery) * recipients;
+
+    document.getElementById('estimatePrice').textContent = '₹ ' + total.toLocaleString('en-IN');
+  }
+
+  // ── SCROLL REVEAL ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Init estimate
+  updateEstimate();
+</script>
+</body>
+</html>
