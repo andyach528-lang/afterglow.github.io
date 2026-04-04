@@ -1227,14 +1227,13 @@
   <div class="hero-content">
     <div class="section-label">✦ Messages across time</div>
     <h1>Your love,<br/><em>delivered</em><br/>when it matters.</h1>
-    <p class="hero-sub">Schedule letters, gifts, and memories to reach your loved ones — days, months, or years from now. A piece of you, forever present.</p>
+    <p class="hero-sub">Schedule video messages, voice recordings, letters, and photos to reach your loved ones — days, months, or years from now. A piece of you, forever present.</p>
     <div class="hero-actions">
       <button class="btn-primary" onclick="openModal()">Create your first message</button>
       <button class="btn-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See how it works →</button>
     </div>
     <div class="tag-pills">
       <span class="tag-pill">Letters &amp; cards</span>
-      <span class="tag-pill">Physical gifts</span>
       <span class="tag-pill">Video messages</span>
       <span class="tag-pill">Voice recordings</span>
       <span class="tag-pill">Photo albums</span>
@@ -1273,7 +1272,7 @@
     <div class="step reveal">
       <div class="step-num">01 — Compose</div>
       <div class="step-title">Write your message or choose a gift</div>
-      <div class="step-desc">A handwritten letter, a physical keepsake, a voice message, a photo album. Choose what your heart wants to send forward in time.</div>
+      <div class="step-desc">A written letter, a voice message, a video, or a photo collection. Choose what your heart wants to send forward in time.</div>
     </div>
     <div class="step reveal">
       <div class="step-num">02 — Address</div>
@@ -1305,29 +1304,24 @@
   </div>
   <div class="what-right">
     <div class="item-card reveal">
+      <div class="ic-icon">🎥</div>
+      <div class="ic-name">Video message</div>
+      <div class="ic-desc">Camera + voice · MP4 · up to 30 min · AES-256 encrypted</div>
+    </div>
+    <div class="item-card reveal">
+      <div class="ic-icon">🎙</div>
+      <div class="ic-name">Voice message</div>
+      <div class="ic-desc">Audio only · MP3 · up to 60 min · private &amp; encrypted</div>
+    </div>
+    <div class="item-card reveal">
       <div class="ic-icon">✉</div>
-      <div class="ic-name">Handwritten letters &amp; cards</div>
-      <div class="ic-desc">Digitally archived + physical delivery in original form</div>
+      <div class="ic-name">Written letter</div>
+      <div class="ic-desc">Type or paste text · converted to sealed PDF · delivered digitally</div>
     </div>
     <div class="item-card reveal">
       <div class="ic-icon">◈</div>
-      <div class="ic-name">Gifts &amp; keepsakes</div>
-      <div class="ic-desc">Jewellery, books, small objects — stored &amp; shipped with care</div>
-    </div>
-    <div class="item-card reveal">
-      <div class="ic-icon">◉</div>
-      <div class="ic-name">Video &amp; voice messages</div>
-      <div class="ic-desc">Securely encrypted, shared privately at the right time</div>
-    </div>
-    <div class="item-card reveal">
-      <div class="ic-icon">◫</div>
-      <div class="ic-name">Photo collections</div>
-      <div class="ic-desc">Printed albums or curated digital galleries, your choice</div>
-    </div>
-    <div class="item-card reveal">
-      <div class="ic-icon">◻</div>
-      <div class="ic-name">Legacy boxes</div>
-      <div class="ic-desc">Curated collections of multiple items delivered together</div>
+      <div class="ic-name">Photo message</div>
+      <div class="ic-desc">Upload images · private encrypted gallery · up to 50 photos</div>
     </div>
   </div>
 </section>
@@ -1342,7 +1336,7 @@
     <div class="pf reveal">
       <div class="pf-label">Factor 01</div>
       <div class="pf-title">What you send</div>
-      <div class="pf-eg">A letter costs less to store than a gift box. Digital-only costs the least.</div>
+      <div class="pf-eg">Video costs more than a letter. Photos and voice sit in between.</div>
     </div>
     <div class="pf reveal">
       <div class="pf-label">Factor 02</div>
@@ -1362,10 +1356,10 @@
       <div class="calc-field">
         <label>What are you sending?</label>
         <select id="itemType" onchange="updateEstimate()">
-          <option value="letter">Letter or card</option>
-          <option value="digital">Digital message / video</option>
-          <option value="small-gift">Small gift or keepsake</option>
-          <option value="large-gift">Large gift or legacy box</option>
+          <option value="video">Video message</option>
+          <option value="audio">Voice message</option>
+          <option value="letter">Written letter</option>
+          <option value="photo">Photo message</option>
         </select>
       </div>
       <div class="calc-field">
@@ -1472,8 +1466,8 @@
         <div class="faq-a">You designate a trusted notifier — a family member, lawyer, or executor — who contacts us when you pass. We can also integrate with estate legal processes. Once we receive verified confirmation, delivery is triggered within 30 days.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">How are physical items stored?</div>
-        <div class="faq-a">All physical items are stored in climate-controlled, humidity-regulated archival facilities. Fragile items are wrapped in acid-free materials. We photograph and digitally catalogue everything upon receipt so you have a permanent record.</div>
+        <div class="faq-q" onclick="toggleFaq(this)">How long are digital messages stored?</div>
+        <div class="faq-a">All digital messages — video, voice, letters, and photos — are stored in AES-256 encrypted cloud storage for the full duration you specify, up to 50 years. Files are replicated across multiple data centres. We guarantee delivery or a full refund.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">What if the recipient has moved or can't be reached?</div>
@@ -1503,7 +1497,7 @@
   <div class="footer-top">
     <div class="footer-brand">
       <a href="#" class="logo">After<span>Glow</span></a>
-      <p>Carrying love across time. We store your messages, gifts, and memories — and deliver them exactly when you intend.</p>
+      <p>Carrying love across time. We store your video messages, voice recordings, letters, and photos — and deliver them exactly when you intend.</p>
     </div>
     <div class="footer-col">
       <h4>Product</h4>
@@ -1535,7 +1529,7 @@
   </div>
   <div class="footer-bottom">
     <p>© 2026 AfterGlow · Mumbai, India</p>
-    <p>support@afterglow.org.in · +91 9082704124</p>
+    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="added8ddddc2dfd9edcccbd9c8dfcac1c2da83c2dfca83c4c3">[email&#160;protected]</a> · +91 9082704124</p>
     <p>Made with intention.</p>
   </div>
 </footer>
@@ -1565,8 +1559,6 @@
       <select>
         <option>Letter or card</option>
         <option>Voice or video message</option>
-        <option>Physical gift or keepsake</option>
-        <option>Legacy box (multiple items)</option>
         <option>Something else</option>
       </select>
     </div>
@@ -1578,7 +1570,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── NAV MOBILE ──
   function toggleNav() {
     document.getElementById('navLinks').classList.toggle('open');
@@ -1609,20 +1601,26 @@
   }
 
   // ── COST ESTIMATOR ──
-  const BASE = { 'letter': 400, 'digital': 200, 'small-gift': 800, 'large-gift': 1800 };
-  const STORAGE_PER_YEAR = { 'letter': 80, 'digital': 30, 'small-gift': 180, 'large-gift': 380 };
-  const DELIVERY = { 'local': 150, 'national': 350, 'international': 1200 };
+  const BASE = { 'video': 699, 'audio': 499, 'letter': 299, 'photo': 399 };
+  const STORAGE_PER_YEAR = { 'video': 99, 'audio': 49, 'letter': 29, 'photo': 59 };
+  const DELIVERY = { 'local': 0, 'national': 0, 'international': 199 };
 
   function updateEstimate() {
     const type = document.getElementById('itemType').value;
     const loc = document.getElementById('location').value;
     const years = Math.max(1, Math.min(50, parseInt(document.getElementById('years').value) || 1));
     const recipients = Math.max(1, Math.min(20, parseInt(document.getElementById('recipients').value) || 1));
-    const base = BASE[type] || 400;
-    const storage = (STORAGE_PER_YEAR[type] || 80) * years;
-    const delivery = DELIVERY[loc] || 150;
+    const base = BASE[type] || 299;
+    const storage = (STORAGE_PER_YEAR[type] || 29) * years;
+    const delivery = DELIVERY[loc] || 0;
     const total = (base + storage + delivery) * recipients;
     document.getElementById('estimatePrice').textContent = '₹ ' + total.toLocaleString('en-IN');
+    const noteEl = document.querySelector('.result-note');
+    if (noteEl) {
+      const labels = {video:'Video',audio:'Voice',letter:'Letter',photo:'Photos'};
+      const dlv = delivery > 0 ? ' + ₹' + delivery + ' intl delivery' : ' · digital delivery free';
+      noteEl.textContent = (labels[type]||type) + ' · ₹' + base + ' base + ₹' + storage + ' storage (' + years + 'yr)' + dlv;
+    }
   }
 
   // ── SCROLL REVEAL ──
@@ -1780,7 +1778,7 @@
     <div class="page-divider"></div>
 
     <h2>What we believe</h2>
-    <p>We believe that a person's love is not limited by their presence. That the words a parent writes for a child's future wedding, the voice message a grandparent records for a grandchild not yet born, the gift a friend sets aside for a milestone twenty years away — these things carry something irreplaceable. Something that reshapes a life.</p>
+    <p>We believe that a person's love is not limited by their presence. That the words a parent writes for a child's future wedding, the voice message a grandparent records for a grandchild not yet born, the photo collection a parent curates for a child's future wedding — these things carry something irreplaceable. Something that reshapes a life.</p>
     <p>We also believe that the act of composing these messages — of sitting down and thinking about what you truly want to say to the people you love — is itself a form of healing. It is an act of clarity, of care, and of courage.</p>
     <p>AfterGlow is not a morbid product. It is a deeply hopeful one. It says: <em>your love will outlast you, and we will help carry it forward.</em></p>
 
@@ -1851,13 +1849,13 @@
     <p>We welcome thoughtful coverage of our mission. If you are writing about grief, legacy, human connection, or the intersection of technology and emotion, we would love to speak with you.</p>
 
     <div class="callout">
-      <p>For press enquiries, interviews, or media assets, contact: <strong>support@afterglow.org.in</strong> — we typically respond within 48 hours.</p>
+      <p>For press enquiries, interviews, or media assets, contact: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="64171114140b161024050210011603080b134a0b16034a0d0a">[email&#160;protected]</a></strong> — we typically respond within 48 hours.</p>
     </div>
 
     <div class="page-divider"></div>
 
     <h2>Brand assets</h2>
-    <p>Our logo, colour palette, typography guidelines, and founder photographs are available on request. Write to <strong>support@afterglow.org.in</strong> with your publication details and intended usage.</p>
+    <p>Our logo, colour palette, typography guidelines, and founder photographs are available on request. Write to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f88b8d8888978a8cb8999e8c9d8a9f94978fd6978a9fd69196">[email&#160;protected]</a></strong> with your publication details and intended usage.</p>
 
     <h2>Key facts for media</h2>
     <ul>
@@ -1931,7 +1929,7 @@
     </ul>
 
     <div class="callout">
-      <p>To apply, send your CV and a short note about why this work matters to you — to <strong>support@afterglow.org.in</strong>. We read every application personally.</p>
+      <p>To apply, send your CV and a short note about why this work matters to you — to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcafa9acacb3aea89cbdbaa8b9aebbb0b3abf2b3aebbf2b5b2">[email&#160;protected]</a></strong>. We read every application personally.</p>
     </div>
   </div>
 </div>
@@ -1950,17 +1948,17 @@
     <div class="contact-grid">
       <div class="contact-card">
         <div class="cc-label">General enquiries</div>
-        <div class="cc-title">support@afterglow.org.in</div>
+        <div class="cc-title"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e3d3b3e3e213c3a0e2f283a2b3c2922213960213c29602720">[email&#160;protected]</a></div>
         <div class="cc-detail">Questions about our service, how it works, or whether AfterGlow is right for you.</div>
       </div>
       <div class="contact-card">
         <div class="cc-label">Customer support</div>
-        <div class="cc-title">support@afterglow.org.in</div>
+        <div class="cc-title"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="35464045455a474175545341504752595a421b5a47521b5c5b">[email&#160;protected]</a></div>
         <div class="cc-detail">Help with an existing order, changes to a scheduled delivery, or tracking an item.</div>
       </div>
       <div class="contact-card">
         <div class="cc-label">Press &amp; media</div>
-        <div class="cc-title">support@afterglow.org.in</div>
+        <div class="cc-title"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="25565055554a575165444351405742494a520b4a57420b4c4b">[email&#160;protected]</a></div>
         <div class="cc-detail">Interview requests, media assets, press kit, and partnership enquiries.</div>
       </div>
       <div class="contact-card">
@@ -1975,7 +1973,7 @@
       </div>
       <div class="contact-card">
         <div class="cc-label">Estate &amp; legal triggers</div>
-        <div class="cc-title">support@afterglow.org.in</div>
+        <div class="cc-title"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="bac9cfcacad5c8cefadbdccedfc8ddd6d5cd94d5c8dd94d3d4">[email&#160;protected]</a></div>
         <div class="cc-detail">For executors, lawyers, or family members initiating a posthumous delivery on behalf of a sender.</div>
       </div>
     </div>
@@ -2048,7 +2046,7 @@
     <p>Your content is retained for as long as necessary to fulfil your delivery, plus a legal hold period of 2 years afterward. After that period, all encrypted content is permanently and irreversibly deleted. You may request earlier deletion at any time, subject to any outstanding delivery commitments.</p>
 
     <h2>4. Your rights</h2>
-    <p>Under applicable Indian data protection law, you have the right to access, correct, export, or delete your personal data. To exercise any of these rights, write to <strong>support@afterglow.org.in</strong>. We will respond within 30 days.</p>
+    <p>Under applicable Indian data protection law, you have the right to access, correct, export, or delete your personal data. To exercise any of these rights, write to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="75060005051a070135141301100712191a025b1a07125b1c1b">[email&#160;protected]</a></strong>. We will respond within 30 days.</p>
 
     <h2>5. Cookies</h2>
     <p>We use only essential cookies — those required for the website to function and for your session to be maintained. We do not use advertising or tracking cookies.</p>
@@ -2057,7 +2055,7 @@
     <p>If we make material changes to this policy, we will notify you by email at least 30 days before they take effect. Continued use of AfterGlow after that date constitutes acceptance of the updated policy.</p>
 
     <div class="callout">
-      <p>Questions about privacy? Write to <strong>support@afterglow.org.in</strong> — a human being will read and respond.</p>
+      <p>Questions about privacy? Write to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1f6c6a6f6f706d6b5f7e796b7a6d7873706831706d78317671">[email&#160;protected]</a></strong> — a human being will read and respond.</p>
     </div>
   </div>
 </div>
@@ -2103,7 +2101,7 @@
     <p>These terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts of Mumbai, Maharashtra.</p>
 
     <h2>9. Contact</h2>
-    <p>Questions about these terms? Write to <strong>support@afterglow.org.in</strong>.</p>
+    <p>Questions about these terms? Write to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2b585e5b5b44595f6b4a4d5f4e594c47445c0544594c054245">[email&#160;protected]</a></strong>.</p>
   </div>
 </div>
 
@@ -2190,7 +2188,7 @@
     <p>AfterGlow holds all delivery funds in a ring-fenced escrow account managed by an independent trustee. In the event that AfterGlow ceases operations for any reason, the trustee is authorised and obligated to transfer all assets, items, and delivery instructions to a designated successor service. Your delivery will happen.</p>
 
     <div class="callout">
-      <p>Found a security vulnerability? Please report it responsibly to <strong>support@afterglow.org.in</strong>. We take all reports seriously and respond within 48 hours.</p>
+      <p>Found a security vulnerability? Please report it responsibly to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e99a9c9999869b9da9888f9d8c9b8e85869ec7869b8ec78087">[email&#160;protected]</a></strong>. We take all reports seriously and respond within 48 hours.</p>
     </div>
   </div>
 </div>
@@ -2219,7 +2217,7 @@
 
     <h3>Designating a notifier</h3>
     <p>You must designate at least one <strong>Trusted Notifier</strong> — a person authorised to contact AfterGlow and initiate the delivery process. This is typically a spouse, adult child, close friend, or your legal executor. Your notifier does not need to know the contents of your messages.</p>
-    <p>We recommend telling your notifier: (a) that you have messages stored with AfterGlow; (b) how to contact us at support@afterglow.org.in; and (c) where to find any reference or order numbers associated with your account.</p>
+    <p>We recommend telling your notifier: (a) that you have messages stored with AfterGlow; (b) how to contact us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ddaea8adadb2afa99dbcbba9b8afbab1b2aaf3b2afbaf3b4b3">[email&#160;protected]</a>; and (c) where to find any reference or order numbers associated with your account.</p>
 
     <h3>Multiple triggers and conditions</h3>
     <p>You may set different messages for different conditions. For example:</p>
@@ -2228,12 +2226,12 @@
       <li>A letter to your child — delivered on their 21st birthday, regardless of when you pass</li>
       <li>A gift for a future grandchild — delivered when your child notifies us of the birth</li>
     </ul>
-    <p>Our team can help you structure these instructions. Write to <strong>support@afterglow.org.in</strong> to speak with someone.</p>
+    <p>Our team can help you structure these instructions. Write to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="087b7d7878677a7c48696e7c6d7a6f64677f26677a6f266166">[email&#160;protected]</a></strong> to speak with someone.</p>
 
     <h3>Including AfterGlow in your will</h3>
     <p>We recommend including a reference to your AfterGlow account in your will or letter of wishes. A suggested clause:</p>
     <div class="callout">
-      <p><em>"I have scheduled messages and/or gifts with AfterGlow Technologies Pvt. Ltd. (support@afterglow.org.in). My executor or family should contact them at support@afterglow.org.in, referencing account number [YOUR ACCOUNT NUMBER], to initiate delivery of these items as per my instructions on file."</em></p>
+      <p><em>"I have scheduled messages and/or gifts with AfterGlow Technologies Pvt. Ltd. (<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e89b9d9898879a9ca8898e9c8d9a8f84879fc6879a8fc68186">[email&#160;protected]</a>). My executor or family should contact them at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="33404643435c4147735255475641545f5c441d5c41541d5a5d">[email&#160;protected]</a>, referencing account number [YOUR ACCOUNT NUMBER], to initiate delivery of these items as per my instructions on file."</em></p>
     </div>
 
     <div class="page-divider"></div>
@@ -2241,7 +2239,7 @@
     <h2>Part II — Acting on behalf of someone who has passed</h2>
 
     <h3>If you are a notifier or executor</h3>
-    <p>If someone you love has passed and you believe they may have stored messages with AfterGlow, please contact us at <strong>support@afterglow.org.in</strong>. We will ask for:</p>
+    <p>If someone you love has passed and you believe they may have stored messages with AfterGlow, please contact us at <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d1a2a4a1a1bea3a591b0b7a5b4a3b6bdbea6ffbea3b6ffb8bf">[email&#160;protected]</a></strong>. We will ask for:</p>
     <ul>
       <li>The full name of the sender</li>
       <li>Their email address or account number, if known</li>
@@ -2252,13 +2250,13 @@
 
     <h3>What if you are the recipient?</h3>
     <p>If you have received a message through AfterGlow, it arrived because someone who loved you wanted it to. The sender made arrangements — sometimes years or decades in advance — to ensure it found you at this moment.</p>
-    <p>If you have questions about the message, or if anything about the delivery seems incomplete, please write to <strong>support@afterglow.org.in</strong>. We will help you in any way we can.</p>
+    <p>If you have questions about the message, or if anything about the delivery seems incomplete, please write to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cbb8bebbbba4b9bf8baaadbfaeb9aca7a4bce5a4b9ace5a2a5">[email&#160;protected]</a></strong>. We will help you in any way we can.</p>
 
     <h3>Grief support</h3>
     <p>We recognise that both sending and receiving messages through AfterGlow can intersect with profound grief. We are not counsellors, but we care deeply about the people we serve. If you need support resources, simply write to us — we will point you toward professional help.</p>
 
     <div class="callout">
-      <p>Estate team direct line: <strong>support@afterglow.org.in</strong> · +91 9082704124 · We handle these enquiries with priority, confidentiality, and care.</p>
+      <p>Estate team direct line: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fa898f8a8a95888eba9b9c8e9f889d96958dd495889dd49394">[email&#160;protected]</a></strong> · +91 9082704124 · We handle these enquiries with priority, confidentiality, and care.</p>
     </div>
   </div>
 </div>
@@ -2834,7 +2832,7 @@
           </div>
         </div>
         <div style="background:var(--warm);border:0.5px solid var(--border);border-left:3px solid var(--gold);padding:1rem 1.5rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.08em;line-height:1.8">
-          Your notifier contacts AfterGlow at support@afterglow.org.in with a copy of the death certificate. Delivery is initiated within 7–14 days after verification.
+          Your notifier contacts AfterGlow at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ffcfaffffe0fdfbcfeee9fbeafde8e3e0f8a1e0fde8a1e6e1">[email&#160;protected]</a> with a copy of the death certificate. Delivery is initiated within 7–14 days after verification.
         </div>
       </div>
 
@@ -2902,7 +2900,7 @@
 </div><!-- end page-studio -->
 
 <!-- ════════════ STUDIO JAVASCRIPT ════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function() {
 
   // ── State ──
@@ -3250,54 +3248,4 @@
     const rel = document.getElementById('relationship') ? document.getElementById('relationship').value || '—' : '—';
     const msgId = 'AG-' + Math.floor(Math.random()*900000+100000);
     const sk = storageKey || 'messages/usrXXXX/msgXXXX/content.enc';
-    const types = { video: 'video/webm', audio: 'audio/webm', letter: 'application/pdf', photo: 'image/gallery' };
-
-    document.getElementById('dbLogDisplay').innerHTML = `
-<span class="log-dim">-- PostgreSQL · afterglow_db · table: messages</span>
-<span class="log-dim">-- INSERT executed ${new Date().toISOString()}</span>
-
-{
-  <span class="log-key">"id"</span>:                <span class="log-val">"${msgId}"</span>,
-  <span class="log-key">"message_type"</span>:       <span class="log-val">"${selectedType}"</span>,
-  <span class="log-key">"content_type"</span>:       <span class="log-val">"${types[selectedType]}"</span>,
-  <span class="log-key">"storage_key"</span>:        <span class="log-val">"${sk}"</span>,
-  <span class="log-key">"encryption_key"</span>:     <span class="log-val">"[AES-256 key · 64 hex chars · stored separately]"</span>,
-  <span class="log-key">"encryption_iv"</span>:      <span class="log-val">"[16-byte IV · stored separately]"</span>,
-  <span class="log-key">"recipient_name"</span>:      <span class="log-val">"${name}"</span>,
-  <span class="log-key">"recipient_email"</span>:     <span class="log-val">"${email}"</span>,
-  <span class="log-key">"recipient_phone"</span>:     <span class="log-val">"${phone}"</span>,
-  <span class="log-key">"relationship"</span>:        <span class="log-val">"${rel}"</span>,
-  <span class="log-key">"delivery_trigger"</span>:    <span class="log-val">"${selectedTrigger}"</span>,
-  <span class="log-key">"delivery_date"</span>:       <span class="log-val">"${date}"</span>,
-  <span class="log-key">"delivery_occasion"</span>:   <span class="log-val">"${occasion}"</span>,
-  <span class="log-key">"status"</span>:              <span class="log-val">"stored"</span>,
-  <span class="log-key">"created_at"</span>:          <span class="log-val">"${new Date().toISOString()}"</span>,
-  <span class="log-key">"delivered_at"</span>:        <span class="log-val">null</span>
-}
-
-<span class="log-ok">✓ INSERT 1 row · message secured · cron job registered</span>
-<span class="log-dim">-- Cron: 0 8 * * * node deliver.js will check daily at 08:00 IST</span>`;
-
-    document.getElementById('confirmRef').textContent = 'REF: ' + msgId;
-  };
-
-  // ── Final confirm ──
-  window.finalConfirm = function() {
-    document.getElementById('confirmBoxContainer').style.display = 'block';
-    document.getElementById('confirmActions').style.display = 'none';
-    document.getElementById('btnBackFromConfirm').style.display = 'none';
-    document.getElementById('btnDone').style.display = 'inline-flex';
-  };
-
-  // ── Helpers ──
-  function formatTime(s) {
-    const m = Math.floor(s / 60);
-    const sec = s % 60;
-    return String(m).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
-  }
-
-})();
-</script>
-
-</body>
-</html>
+    const types = { video: 'video/webm', audio: 'a
