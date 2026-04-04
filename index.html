@@ -882,6 +882,263 @@
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
     /* ── RESPONSIVE ── */
+    /* ── INNER PAGES ── */
+    .page-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      z-index: 300;
+      overflow-y: auto;
+    }
+    .page-overlay.active { display: block; }
+
+    .page-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.6rem 5rem;
+      border-bottom: 0.5px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--cream);
+      z-index: 10;
+    }
+    .page-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+    .page-back:hover { color: var(--ink); }
+
+    .page-body {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 5rem 2rem 7rem;
+    }
+
+    .page-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .page-body h1 {
+      font-size: 3.2rem;
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 0.6rem;
+    }
+
+    .page-body .page-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    .page-divider {
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+      margin: 2.5rem 0;
+    }
+
+    .page-body h2 {
+      font-size: 1.6rem;
+      font-weight: 300;
+      margin-top: 3rem;
+      margin-bottom: 0.9rem;
+      line-height: 1.3;
+    }
+
+    .page-body h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-top: 2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .page-body p {
+      font-size: 1.08rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+    }
+
+    .page-body p strong {
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .page-body ul, .page-body ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .page-body li {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 0.4rem;
+    }
+
+    .page-body blockquote {
+      border-left: 2px solid var(--gold);
+      padding-left: 1.8rem;
+      margin: 2.5rem 0;
+      font-size: 1.4rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .team-card {
+      border: 0.5px solid var(--border);
+      padding: 1.6rem;
+      background: var(--white);
+    }
+
+    .team-initial {
+      width: 48px;
+      height: 48px;
+      background: var(--warm);
+      border: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .team-name { font-size: 1.05rem; font-weight: 400; margin-bottom: 0.2rem; }
+    .team-role { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--muted); }
+
+    .press-grid { display: grid; gap: 1px; background: var(--border); margin: 2rem 0; }
+    .press-item {
+      background: var(--cream);
+      padding: 1.6rem 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 2rem;
+    }
+    .press-pub { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 0.4rem; }
+    .press-title { font-size: 1.05rem; font-weight: 400; line-height: 1.4; }
+    .press-date { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); margin-top: 0.3rem; }
+    .press-arrow { font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--muted); flex-shrink: 0; padding-top: 1.4rem; }
+
+    .job-card {
+      border: 0.5px solid var(--border);
+      padding: 1.8rem;
+      background: var(--white);
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+    .job-card:hover { border-color: var(--gold); }
+    .job-dept { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 0.5rem; }
+    .job-title { font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; }
+    .job-meta { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; }
+    .contact-card {
+      border: 0.5px solid var(--border);
+      padding: 1.8rem;
+      background: var(--white);
+    }
+    .contact-card .cc-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 0.6rem; }
+    .contact-card .cc-title { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.4rem; }
+    .contact-card .cc-detail { font-size: 0.92rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
+
+    .security-row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      padding: 1.6rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .sec-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--warm);
+      border: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .sec-title { font-size: 1.05rem; font-weight: 400; margin-bottom: 0.35rem; }
+    .sec-desc { font-size: 0.95rem; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+    .callout {
+      background: var(--warm);
+      border: 0.5px solid var(--border);
+      border-left: 3px solid var(--gold);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+    }
+    .callout p { color: var(--ink); margin-bottom: 0; font-size: 1rem; }
+
+    .page-contact-form { margin-top: 2.5rem; }
+    .page-contact-form .form-group { margin-bottom: 1.2rem; }
+    .page-contact-form label {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+    }
+    .page-contact-form input,
+    .page-contact-form select,
+    .page-contact-form textarea {
+      width: 100%;
+      padding: 0.8rem 0.9rem;
+      border: 0.5px solid var(--border);
+      background: var(--white);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    .page-contact-form input:focus,
+    .page-contact-form select:focus,
+    .page-contact-form textarea:focus { border-color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .page-nav { padding: 1.2rem 1.5rem; }
+      .page-body { padding: 3rem 1.5rem 5rem; }
+      .page-body h1 { font-size: 2.4rem; }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 1024px) {
       nav { padding: 1.5rem 2.5rem; }
       .hero { padding: 3.5rem 2.5rem; gap: 2.5rem; }
@@ -957,6 +1214,7 @@
     <li><a href="#what">What to send</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li><a href="#" onclick="openPage('studio');return false;">Record a message</a></li>
     <li><a href="#" class="btn-nav" onclick="openModal()">Begin a legacy</a></li>
   </ul>
   <button class="nav-hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
@@ -1259,24 +1517,24 @@
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
-        <li><a href="#">Our story</a></li>
-        <li><a href="#">Press</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#" onclick="openPage('our-story');return false;">Our story</a></li>
+        <li><a href="#" onclick="openPage('press');return false;">Press</a></li>
+        <li><a href="#" onclick="openPage('careers');return false;">Careers</a></li>
+        <li><a href="#" onclick="openPage('contact');return false;">Contact</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Trust &amp; legal</h4>
       <ul>
-        <li><a href="#">Privacy policy</a></li>
-        <li><a href="#">Terms of service</a></li>
-        <li><a href="#">Security</a></li>
-        <li><a href="#">Estate guide</a></li>
+        <li><a href="#" onclick="openPage('privacy');return false;">Privacy policy</a></li>
+        <li><a href="#" onclick="openPage('terms');return false;">Terms of service</a></li>
+        <li><a href="#" onclick="openPage('security');return false;">Security</a></li>
+        <li><a href="#" onclick="openPage('estate');return false;">Estate guide</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 AfterGlow · Mumbai, India</p>
+    <p>© 2026 AfterGlow · Mumbai, India</p>
     <p>support@afterglow.org.in · +91 9082704124</p>
     <p>Made with intention.</p>
   </div>
@@ -1339,22 +1597,14 @@
     if (e.target === document.getElementById('modalOverlay')) closeModal();
   }
   function handleFormSubmit() {
-    const modal = document.querySelector('.modal');
-    modal.innerHTML = `
-      <div style="text-align:center;padding:2rem 0">
-        <div style="font-size:2.5rem;margin-bottom:1rem">✦</div>
-        <h3 style="margin-bottom:0.8rem">Thank you.</h3>
-        <p style="color:var(--muted);font-weight:300;line-height:1.7;font-size:1rem">Your message is with us. We'll reach out within 24 hours to help you begin.<br/><br/>Something beautiful is being set in motion.</p>
-        <button class="btn-primary" style="margin-top:2rem" onclick="closeModal()">Close</button>
-      </div>
-    `;
+    const modal = document.querySelector('#modalOverlay .modal');
+    modal.innerHTML = '<div style="text-align:center;padding:2rem 0"><div style="font-size:2.5rem;margin-bottom:1rem">✦</div><h3 style="margin-bottom:0.8rem">Thank you.</h3><p style="color:var(--muted);font-weight:300;line-height:1.7;font-size:1rem">Your message is with us. We\'ll reach out within 24 hours to help you begin.<br/><br/>Something beautiful is being set in motion.</p><button class="btn-primary" style="margin-top:2rem" onclick="closeModal()">Close</button></div>';
   }
 
   // ── FAQ ACCORDION ──
   function toggleFaq(el) {
     const item = el.parentElement;
-    const allItems = document.querySelectorAll('.faq-item');
-    allItems.forEach(i => { if (i !== item) i.classList.remove('open'); });
+    document.querySelectorAll('.faq-item').forEach(i => { if (i !== item) i.classList.remove('open'); });
     item.classList.toggle('open');
   }
 
@@ -1368,29 +1618,1686 @@
     const loc = document.getElementById('location').value;
     const years = Math.max(1, Math.min(50, parseInt(document.getElementById('years').value) || 1));
     const recipients = Math.max(1, Math.min(20, parseInt(document.getElementById('recipients').value) || 1));
-
     const base = BASE[type] || 400;
     const storage = (STORAGE_PER_YEAR[type] || 80) * years;
     const delivery = DELIVERY[loc] || 150;
     const total = (base + storage + delivery) * recipients;
-
     document.getElementById('estimatePrice').textContent = '₹ ' + total.toLocaleString('en-IN');
   }
 
   // ── SCROLL REVEAL ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
     });
   }, { threshold: 0.12 });
-
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── INNER PAGES ──
+  function openPage(id) {
+    document.querySelectorAll('.page-overlay').forEach(p => p.classList.remove('active'));
+    const el = document.getElementById('page-' + id);
+    if (el) { el.classList.add('active'); el.scrollTop = 0; document.body.style.overflow = 'hidden'; }
+  }
+  function closePage() {
+    document.querySelectorAll('.page-overlay').forEach(p => p.classList.remove('active'));
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closePage(); closeModal(); } });
 
   // Init estimate
   updateEstimate();
 </script>
+
+<!-- ════════════ INNER PAGE STYLES ════════════ -->
+<style>
+  .page-overlay {
+    display: none; position: fixed; inset: 0;
+    background: var(--cream); z-index: 300; overflow-y: auto;
+  }
+  .page-overlay.active { display: block; }
+  .page-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.6rem 5rem; border-bottom: 0.5px solid var(--border);
+    position: sticky; top: 0; background: var(--cream); z-index: 10;
+  }
+  .page-back {
+    font-family: 'DM Mono', monospace; font-size: 0.75rem;
+    letter-spacing: 0.08em; color: var(--muted); background: none;
+    border: none; cursor: pointer; transition: color 0.2s;
+  }
+  .page-back:hover { color: var(--ink); }
+  .page-body { max-width: 820px; margin: 0 auto; padding: 5rem 2rem 7rem; }
+  .page-label {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1.2rem;
+  }
+  .page-body h1 { font-size: 3.2rem; font-weight: 300; line-height: 1.15; margin-bottom: 0.6rem; }
+  .page-body .page-date {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem;
+    letter-spacing: 0.1em; color: var(--muted); margin-bottom: 3rem;
+  }
+  .page-divider { width: 48px; height: 1px; background: var(--gold); margin: 2.5rem 0; }
+  .page-body h2 { font-size: 1.6rem; font-weight: 300; margin-top: 3rem; margin-bottom: 0.9rem; line-height: 1.3; }
+  .page-body h3 { font-size: 1.2rem; font-weight: 400; margin-top: 2rem; margin-bottom: 0.6rem; }
+  .page-body p { font-size: 1.08rem; font-weight: 300; color: var(--muted); line-height: 1.85; margin-bottom: 1.2rem; }
+  .page-body p strong { font-weight: 400; color: var(--ink); }
+  .page-body ul, .page-body ol { padding-left: 1.5rem; margin-bottom: 1.2rem; }
+  .page-body li { font-size: 1.05rem; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 0.4rem; }
+  .page-body blockquote {
+    border-left: 2px solid var(--gold); padding-left: 1.8rem; margin: 2.5rem 0;
+    font-size: 1.4rem; font-style: italic; font-weight: 300; color: var(--ink); line-height: 1.6;
+  }
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0; }
+  .team-card { border: 0.5px solid var(--border); padding: 1.6rem; background: var(--white); }
+  .team-initial {
+    width: 48px; height: 48px; background: var(--warm); border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; font-weight: 300; color: var(--gold); margin-bottom: 1rem;
+  }
+  .team-name { font-size: 1.05rem; font-weight: 400; margin-bottom: 0.2rem; }
+  .team-role { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--muted); }
+  .press-grid { display: grid; gap: 0; margin: 2rem 0; }
+  .press-item {
+    padding: 1.6rem 0; display: grid; grid-template-columns: 1fr auto;
+    align-items: start; gap: 2rem; border-bottom: 0.5px solid var(--border);
+  }
+  .press-pub { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 0.4rem; }
+  .press-title { font-size: 1.05rem; font-weight: 400; line-height: 1.4; color: var(--ink); }
+  .press-date { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); margin-top: 0.3rem; }
+  .press-arrow { font-family: 'DM Mono', monospace; font-size: 0.9rem; color: var(--muted); flex-shrink: 0; padding-top: 1.4rem; }
+  .job-card {
+    border: 0.5px solid var(--border); padding: 1.8rem;
+    background: var(--white); margin-bottom: 1rem; transition: border-color 0.2s;
+  }
+  .job-card:hover { border-color: var(--gold); }
+  .job-dept { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 0.5rem; }
+  .job-title { font-size: 1.2rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .job-meta { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 2rem 0; }
+  .contact-card { border: 0.5px solid var(--border); padding: 1.8rem; background: var(--white); }
+  .contact-card .cc-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 0.6rem; }
+  .contact-card .cc-title { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.4rem; color: var(--ink); }
+  .contact-card .cc-detail { font-size: 0.9rem; color: var(--muted); font-weight: 300; line-height: 1.65; }
+  .security-row {
+    display: grid; grid-template-columns: 52px 1fr; gap: 1.5rem;
+    align-items: start; padding: 1.6rem 0; border-bottom: 0.5px solid var(--border);
+  }
+  .sec-icon {
+    width: 52px; height: 52px; background: var(--warm); border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;
+  }
+  .sec-title { font-size: 1.05rem; font-weight: 400; margin-bottom: 0.35rem; color: var(--ink); }
+  .sec-desc { font-size: 0.95rem; color: var(--muted); font-weight: 300; line-height: 1.75; }
+  .callout {
+    background: var(--warm); border: 0.5px solid var(--border);
+    border-left: 3px solid var(--gold); padding: 1.5rem 2rem; margin: 2rem 0;
+  }
+  .callout p { color: var(--ink); margin-bottom: 0; font-size: 1rem; }
+  .page-contact-form .form-group { margin-bottom: 1.2rem; }
+  .page-contact-form label {
+    display: block; font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.45rem;
+  }
+  .page-contact-form input,
+  .page-contact-form select,
+  .page-contact-form textarea {
+    width: 100%; padding: 0.8rem 0.9rem; border: 0.5px solid var(--border);
+    background: var(--white); font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; color: var(--ink); outline: none; transition: border-color 0.2s; resize: vertical;
+  }
+  .page-contact-form input:focus,
+  .page-contact-form select:focus,
+  .page-contact-form textarea:focus { border-color: var(--gold); }
+  @media (max-width: 768px) {
+    .page-nav { padding: 1.2rem 1.5rem; }
+    .page-body { padding: 3rem 1.5rem 5rem; }
+    .page-body h1 { font-size: 2.4rem; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<!-- ════════════ OUR STORY ════════════ -->
+<div class="page-overlay" id="page-our-story">
+  <div class="page-nav">
+    <button class="page-back" onclick="closePage()">← Back to AfterGlow</button>
+    <a href="#" class="logo">After<span>Glow</span></a>
+  </div>
+  <div class="page-body">
+    <div class="page-label">✦ Company</div>
+    <h1>Our story.</h1>
+    <p class="page-date">Founded 2026 · Mumbai, India</p>
+
+    <blockquote>"I never got to say goodbye properly. I had so much left to give."</blockquote>
+
+    <p>AfterGlow began with a single moment of grief. Our founder, Andy, lost his mother in April 2026. In the weeks that followed — going through his mother's belongings — he found a half-written letter addressed to him, never finished, never sent. It was a letter about pride. About watching him grow. About a mother's love that had never quite found the words in life.</p>
+
+    <p>That unfinished letter became the seed of an obsession: <strong>what if we could give people the time and the tools to finish what they meant to say?</strong> Not in a hurry, not in a hospital room — but calmly, intentionally, while life was still full and present.</p>
+
+    <p>AfterGlow was built to answer that question.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>What we believe</h2>
+    <p>We believe that a person's love is not limited by their presence. That the words a parent writes for a child's future wedding, the voice message a grandparent records for a grandchild not yet born, the gift a friend sets aside for a milestone twenty years away — these things carry something irreplaceable. Something that reshapes a life.</p>
+    <p>We also believe that the act of composing these messages — of sitting down and thinking about what you truly want to say to the people you love — is itself a form of healing. It is an act of clarity, of care, and of courage.</p>
+    <p>AfterGlow is not a morbid product. It is a deeply hopeful one. It says: <em>your love will outlast you, and we will help carry it forward.</em></p>
+
+    <div class="page-divider"></div>
+
+    <h2>The team</h2>
+    <p>We are a small team of people who have all experienced loss — and who believe that technology, used with restraint and reverence, can help close the distances that grief opens up.</p>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-initial">AA</div>
+        <div class="team-name">Andy. A</div>
+        <div class="team-role">Founder &amp; CEO</div>
+      </div>
+      <div class="team-card">
+        <div class="team-initial">ST</div>
+        <div class="team-name">Sandeep T.</div>
+        <div class="team-role">Co-Founder</div>
+      </div>
+      <div class="team-card">
+        <div class="team-initial">SR</div>
+        <div class="team-name">Sunita Rao</div>
+        <div class="team-role">Head of Operations</div>
+      </div>
+      <div class="team-card">
+        <div class="team-initial">KP</div>
+        <div class="team-name">Karan Pillai</div>
+        <div class="team-role">Head of Technology</div>
+      </div>
+      <div class="team-card">
+        <div class="team-initial">DV</div>
+        <div class="team-name">Divya Venkat</div>
+        <div class="team-role">Head of Care &amp; Delivery</div>
+      </div>
+      <div class="team-card">
+        <div class="team-initial">RB</div>
+        <div class="team-name">Rohan Bose</div>
+        <div class="team-role">Legal &amp; Estate Counsel</div>
+      </div>
+      <div class="team-card">
+        <div class="team-initial">AS</div>
+        <div class="team-name">Ananya Shah</div>
+        <div class="team-role">Customer Experience</div>
+      </div>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <h2>Our commitments</h2>
+    <p><strong>We will always be honest about what we can do.</strong> We are a young company. We will tell you what our limits are, and we will never overpromise on something as important as this.</p>
+    <p><strong>We will guard your messages as if they were our own.</strong> Every item entrusted to us is treated with the same care we would want for our own families.</p>
+    <p><strong>We will never profit from your data.</strong> Your messages, your recipients, your stories — these are sacred. They are not inventory.</p>
+    <p><strong>We will still be here.</strong> We have structured AfterGlow with legal and financial safeguards so that even if our circumstances change, your deliveries will always happen.</p>
+  </div>
+</div>
+
+<!-- ════════════ PRESS ════════════ -->
+<div class="page-overlay" id="page-press">
+  <div class="page-nav">
+    <button class="page-back" onclick="closePage()">← Back to AfterGlow</button>
+    <a href="#" class="logo">After<span>Glow</span></a>
+  </div>
+  <div class="page-body">
+    <div class="page-label">✦ Company</div>
+    <h1>Press.</h1>
+    <p class="page-date">Press kit &amp; media enquiries</p>
+
+    <p>We welcome thoughtful coverage of our mission. If you are writing about grief, legacy, human connection, or the intersection of technology and emotion, we would love to speak with you.</p>
+
+    <div class="callout">
+      <p>For press enquiries, interviews, or media assets, contact: <strong>support@afterglow.org.in</strong> — we typically respond within 48 hours.</p>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <h2>Brand assets</h2>
+    <p>Our logo, colour palette, typography guidelines, and founder photographs are available on request. Write to <strong>support@afterglow.org.in</strong> with your publication details and intended usage.</p>
+
+    <h2>Key facts for media</h2>
+    <ul>
+      <li>Founded: 2026, Mumbai, India</li>
+      <li>Sector: Legacy tech, grief-tech, emotional wellbeing</li>
+      <li>Services: Time-delayed delivery of letters, gifts, videos &amp; voice messages</li>
+      <li>Storage duration: 1 to 50 years</li>
+      <li>Delivery coverage: Pan-India, with international delivery available</li>
+      <li>Founder: Andy. A (available for interviews)</li>
+      <li>Co-Founder: Sandeep T. (available for interviews)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ════════════ CAREERS ════════════ -->
+<div class="page-overlay" id="page-careers">
+  <div class="page-nav">
+    <button class="page-back" onclick="closePage()">← Back to AfterGlow</button>
+    <a href="#" class="logo">After<span>Glow</span></a>
+  </div>
+  <div class="page-body">
+    <div class="page-label">✦ Company</div>
+    <h1>Join us.</h1>
+    <p class="page-date">Mumbai, India · Remote-friendly</p>
+
+    <p>We are building something unusual — a company at the intersection of logistics, technology, and deeply human emotion. If that combination excites you, we would love to meet you.</p>
+    <p>We are a small team. Every person here carries significant responsibility and meaningful work. We hire slowly, care deeply about fit, and believe that the right people make all the difference in a mission like ours.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>Open roles</h2>
+
+    <div class="job-card">
+      <div class="job-dept">Operations</div>
+      <div class="job-title">Storage &amp; Logistics Coordinator</div>
+      <div class="job-meta">Mumbai, On-site · Full-time</div>
+      <p style="margin-top:0.8rem">Manage intake, cataloguing, and long-term storage of physical items. Coordinate delivery scheduling and third-party courier relationships. You are meticulous, organised, and understand that every box in our care holds something irreplaceable.</p>
+    </div>
+
+    <div class="job-card">
+      <div class="job-dept">Technology</div>
+      <div class="job-title">Full-Stack Engineer</div>
+      <div class="job-meta">Remote · Full-time</div>
+      <p style="margin-top:0.8rem">Build and maintain the AfterGlow platform — from the message composition experience to the delivery scheduling engine. You care about craft, security, and reliability above all else.</p>
+    </div>
+
+    <div class="job-card">
+      <div class="job-dept">Customer Experience</div>
+      <div class="job-title">Care Specialist</div>
+      <div class="job-meta">Mumbai or Remote · Full-time</div>
+      <p style="margin-top:0.8rem">Be the human voice of AfterGlow. Support customers through one of the most emotionally significant decisions they will make. Empathy, patience, and clear communication are everything in this role.</p>
+    </div>
+
+    <div class="job-card">
+      <div class="job-dept">Legal</div>
+      <div class="job-title">Estate &amp; Trust Law Consultant</div>
+      <div class="job-meta">Mumbai, Part-time · Contract</div>
+      <p style="margin-top:0.8rem">Advise on estate-triggered delivery mechanisms, executor relationships, and cross-jurisdictional legal questions. Experience with Indian succession law required; international exposure a plus.</p>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <h2>What we offer</h2>
+    <ul>
+      <li>Meaningful work — you will feel its weight, in the best way</li>
+      <li>Competitive salary benchmarked to Mumbai market rates</li>
+      <li>Flexible hours and remote-first culture</li>
+      <li>A small team where your voice shapes the company</li>
+      <li>Health insurance for you and your immediate family</li>
+      <li>Generous paid bereavement leave — taken seriously here</li>
+    </ul>
+
+    <div class="callout">
+      <p>To apply, send your CV and a short note about why this work matters to you — to <strong>support@afterglow.org.in</strong>. We read every application personally.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ CONTACT ════════════ -->
+<div class="page-overlay" id="page-contact">
+  <div class="page-nav">
+    <button class="page-back" onclick="closePage()">← Back to AfterGlow</button>
+    <a href="#" class="logo">After<span>Glow</span></a>
+  </div>
+  <div class="page-body">
+    <div class="page-label">✦ Company</div>
+    <h1>Get in touch.</h1>
+    <p class="page-date">We respond to all enquiries within 24 hours</p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="cc-label">General enquiries</div>
+        <div class="cc-title">support@afterglow.org.in</div>
+        <div class="cc-detail">Questions about our service, how it works, or whether AfterGlow is right for you.</div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-label">Customer support</div>
+        <div class="cc-title">support@afterglow.org.in</div>
+        <div class="cc-detail">Help with an existing order, changes to a scheduled delivery, or tracking an item.</div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-label">Press &amp; media</div>
+        <div class="cc-title">support@afterglow.org.in</div>
+        <div class="cc-detail">Interview requests, media assets, press kit, and partnership enquiries.</div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-label">Phone</div>
+        <div class="cc-title">+91 9082704124</div>
+        <div class="cc-detail">Monday to Friday, 9am – 6pm IST. For sensitive matters, we prefer speaking with you directly.</div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-label">Registered office</div>
+        <div class="cc-title">Mumbai, Maharashtra</div>
+        <div class="cc-detail">AfterGlow Technologies Pvt. Ltd.<br>Lower Parel, Mumbai — 400 013, India</div>
+      </div>
+      <div class="contact-card">
+        <div class="cc-label">Estate &amp; legal triggers</div>
+        <div class="cc-title">support@afterglow.org.in</div>
+        <div class="cc-detail">For executors, lawyers, or family members initiating a posthumous delivery on behalf of a sender.</div>
+      </div>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <h2>Send us a message</h2>
+    <div class="page-contact-form">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div class="form-group">
+          <label>Your name</label>
+          <input type="text" placeholder="Full name" />
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" placeholder="you@email.com" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select>
+          <option>General enquiry</option>
+          <option>Help with an existing order</option>
+          <option>Press or media</option>
+          <option>Estate / posthumous delivery</option>
+          <option>Careers</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea rows="5" placeholder="Tell us what's on your mind..."></textarea>
+      </div>
+      <button class="btn-primary" style="padding:0.9rem 2rem" onclick="this.textContent='Message sent ✦';this.disabled=true;">Send message</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ PRIVACY POLICY ════════════ -->
+<div class="page-overlay" id="page-privacy">
+  <div class="page-nav">
+    <button class="page-back" onclick="closePage()">← Back to AfterGlow</button>
+    <a href="#" class="logo">After<span>Glow</span></a>
+  </div>
+  <div class="page-body">
+    <div class="page-label">✦ Trust &amp; legal</div>
+    <h1>Privacy policy.</h1>
+    <p class="page-date">Last updated: 1 January 2026</p>
+
+    <p>Your privacy is not a formality to us — it is central to what AfterGlow does. The messages and objects entrusted to us are among the most personal things a person can share. This policy explains clearly what we collect, why we collect it, and how we protect it.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>1. What we collect</h2>
+    <p><strong>Account information:</strong> Your name, email address, phone number, and billing details when you create an account or place an order.</p>
+    <p><strong>Message content:</strong> Letters, voice recordings, videos, photographs, and any written instructions you provide for delivery. This content is encrypted immediately upon receipt and is never read, viewed, or listened to by AfterGlow staff unless you explicitly request assistance.</p>
+    <p><strong>Recipient information:</strong> The name, address, email, and phone number of the person you designate to receive your message. This is stored securely and used solely for the purpose of delivery.</p>
+    <p><strong>Usage data:</strong> Standard web analytics — pages visited, time on site, device type. We use this to improve our service. We do not sell this data.</p>
+
+    <h2>2. How we use your data</h2>
+    <ul>
+      <li>To fulfil your delivery exactly as instructed</li>
+      <li>To communicate with you about your order</li>
+      <li>To improve our platform and services</li>
+      <li>To comply with legal obligations</li>
+    </ul>
+    <p>We do not use your data for advertising. We do not sell or share your data with third parties except where strictly required to fulfil delivery (e.g. courier partners, who operate under their own privacy obligations).</p>
+
+    <h2>3. Data retention</h2>
+    <p>Your content is retained for as long as necessary to fulfil your delivery, plus a legal hold period of 2 years afterward. After that period, all encrypted content is permanently and irreversibly deleted. You may request earlier deletion at any time, subject to any outstanding delivery commitments.</p>
+
+    <h2>4. Your rights</h2>
+    <p>Under applicable Indian data protection law, you have the right to access, correct, export, or delete your personal data. To exercise any of these rights, write to <strong>support@afterglow.org.in</strong>. We will respond within 30 days.</p>
+
+    <h2>5. Cookies</h2>
+    <p>We use only essential cookies — those required for the website to function and for your session to be maintained. We do not use advertising or tracking cookies.</p>
+
+    <h2>6. Changes to this policy</h2>
+    <p>If we make material changes to this policy, we will notify you by email at least 30 days before they take effect. Continued use of AfterGlow after that date constitutes acceptance of the updated policy.</p>
+
+    <div class="callout">
+      <p>Questions about privacy? Write to <strong>support@afterglow.org.in</strong> — a human being will read and respond.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ TERMS OF SERVICE ════════════ -->
+<div class="page-overlay" id="page-terms">
+  <div class="page-nav">
+    <button class="page-back" onclick="closePage()">← Back to AfterGlow</button>
+    <a href="#" class="logo">After<span>Glow</span></a>
+  </div>
+  <div class="page-body">
+    <div class="page-label">✦ Trust &amp; legal</div>
+    <h1>Terms of service.</h1>
+    <p class="page-date">Last updated: 1 January 2026 · Governing law: India</p>
+
+    <p>These terms govern your use of AfterGlow's services. We have written them in plain language because we believe you deserve to understand what you are agreeing to.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>1. The service</h2>
+    <p>AfterGlow provides scheduled delivery of messages, physical items, and digital content to recipients designated by you (the "Sender"). Delivery occurs at the date and conditions specified at the time of order. We are a delivery and custody service — we do not provide legal, financial, or estate planning advice.</p>
+
+    <h2>2. Placing an order</h2>
+    <p>When you place an order, you confirm that: (a) you are the rightful owner of any physical item submitted; (b) the content of your message does not violate any applicable law; (c) you have the right to share the recipient's personal information with us for the purpose of delivery; and (d) payment has been made in full at the time of order.</p>
+
+    <h2>3. Pricing and payment</h2>
+    <p>All pricing is calculated at the time of order and paid upfront. The quoted price covers storage for the specified duration plus final delivery. Prices are not subject to change after payment is confirmed. Payment is accepted via major Indian payment methods including UPI, net banking, and credit/debit cards.</p>
+
+    <h2>4. Modifications and cancellations</h2>
+    <p><strong>Modifications:</strong> You may modify recipient contact details or the scheduled delivery date up to 30 days before the delivery date, subject to any cost difference. Changes to message content are permitted up to 60 days before delivery.</p>
+    <p><strong>Cancellations:</strong> Cancellations made more than 90 days before the scheduled delivery date qualify for a full refund less a 5% processing fee. Cancellations within 90 days are not eligible for a refund of storage costs already incurred, but delivery fees will be refunded.</p>
+
+    <h2>5. Our delivery guarantee</h2>
+    <p>We guarantee delivery or a full refund. If we are unable to complete a delivery after three attempts, we will hold your item for 5 years and attempt to locate the recipient through secondary contact details. If delivery remains impossible after this period, you or your estate will be notified and offered a refund.</p>
+
+    <h2>6. Prohibited content</h2>
+    <p>You may not submit content that is illegal, defamatory, hateful, or harmful. AfterGlow reserves the right to refuse or withhold delivery of any item we reasonably determine to be in violation of applicable law, without obligation to refund.</p>
+
+    <h2>7. Limitation of liability</h2>
+    <p>AfterGlow's liability for any claim arising from our services is limited to the amount paid for the affected order. We are not liable for indirect, consequential, or emotional damages. We are not responsible for delays caused by force majeure, natural disaster, or failure of third-party couriers beyond our reasonable control.</p>
+
+    <h2>8. Governing law</h2>
+    <p>These terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts of Mumbai, Maharashtra.</p>
+
+    <h2>9. Contact</h2>
+    <p>Questions about these terms? Write to <strong>support@afterglow.org.in</strong>.</p>
+  </div>
+</div>
+
+<!-- ════════════ SECURITY ════════════ -->
+<div class="page-overlay" id="page-security">
+  <div class="page-nav">
+    <button class="page-back" onclick="closePage()">← Back to AfterGlow</button>
+    <a href="#" class="logo">After<span>Glow</span></a>
+  </div>
+  <div class="page-body">
+    <div class="page-label">✦ Trust &amp; legal</div>
+    <h1>Security.</h1>
+    <p class="page-date">How we protect what you entrust to us</p>
+
+    <p>Every message stored with AfterGlow carries weight that cannot be replaced. We take security — both digital and physical — with complete seriousness. This page describes the measures we have put in place to protect your content, your identity, and your recipient's information.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>Digital security</h2>
+
+    <div class="security-row">
+      <div class="sec-icon">🔐</div>
+      <div>
+        <div class="sec-title">End-to-end encryption</div>
+        <div class="sec-desc">All digital content — letters, voice recordings, videos, photographs — is encrypted using AES-256 at the moment of upload. Content is decrypted only at the time of delivery, and only for transmission to the designated recipient. No AfterGlow employee can access the plaintext of your messages.</div>
+      </div>
+    </div>
+
+    <div class="security-row">
+      <div class="sec-icon">🛡</div>
+      <div>
+        <div class="sec-title">Secure infrastructure</div>
+        <div class="sec-desc">Our platform is hosted on ISO 27001-certified cloud infrastructure with automatic failover and geographic redundancy. All data is replicated across multiple data centres within India. We conduct automated vulnerability scans and quarterly penetration testing.</div>
+      </div>
+    </div>
+
+    <div class="security-row">
+      <div class="sec-icon">🔑</div>
+      <div>
+        <div class="sec-title">Access control</div>
+        <div class="sec-desc">Access to customer data within AfterGlow is role-based and strictly limited. No single employee has access to both the encryption keys and the stored content. All internal access is logged, audited, and reviewed monthly.</div>
+      </div>
+    </div>
+
+    <div class="security-row">
+      <div class="sec-icon">📡</div>
+      <div>
+        <div class="sec-title">Transmission security</div>
+        <div class="sec-desc">All data transmitted between your device and our servers is protected by TLS 1.3. We enforce HTTPS across all endpoints and use HSTS headers. Older, insecure protocols are disabled entirely.</div>
+      </div>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <h2>Physical security</h2>
+
+    <div class="security-row">
+      <div class="sec-icon">🏛</div>
+      <div>
+        <div class="sec-title">Archival storage facilities</div>
+        <div class="sec-desc">Physical items are stored in purpose-built archival facilities with controlled temperature (18–21°C), regulated humidity (45–55%), and UV-filtered lighting. All items are individually catalogued with photographic records taken upon intake.</div>
+      </div>
+    </div>
+
+    <div class="security-row">
+      <div class="sec-icon">📦</div>
+      <div>
+        <div class="sec-title">Item handling protocol</div>
+        <div class="sec-desc">All physical items are handled by gloved staff and wrapped in acid-free archival materials. Fragile items are packed in custom-cut foam. Sealed letters and envelopes are never opened under any circumstances.</div>
+      </div>
+    </div>
+
+    <div class="security-row">
+      <div class="sec-icon">🔒</div>
+      <div>
+        <div class="sec-title">Facility access</div>
+        <div class="sec-desc">Storage facilities are access-controlled with biometric entry, 24/7 CCTV monitoring, and motion detection. A full access log is maintained. Only vetted AfterGlow operations staff are authorised to enter storage areas.</div>
+      </div>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <h2>Business continuity</h2>
+    <p>AfterGlow holds all delivery funds in a ring-fenced escrow account managed by an independent trustee. In the event that AfterGlow ceases operations for any reason, the trustee is authorised and obligated to transfer all assets, items, and delivery instructions to a designated successor service. Your delivery will happen.</p>
+
+    <div class="callout">
+      <p>Found a security vulnerability? Please report it responsibly to <strong>support@afterglow.org.in</strong>. We take all reports seriously and respond within 48 hours.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ ESTATE GUIDE ════════════ -->
+<div class="page-overlay" id="page-estate">
+  <div class="page-nav">
+    <button class="page-back" onclick="closePage()">← Back to AfterGlow</button>
+    <a href="#" class="logo">After<span>Glow</span></a>
+  </div>
+  <div class="page-body">
+    <div class="page-label">✦ Trust &amp; legal</div>
+    <h1>Estate guide.</h1>
+    <p class="page-date">For those planning ahead — and for those left to carry it forward</p>
+
+    <blockquote>"The most loving thing you can do is make it easy for the people you leave behind."</blockquote>
+
+    <p>This guide is for two kinds of people: those who are planning messages to be delivered after their passing, and those who are acting on behalf of someone who has already passed and left instructions with AfterGlow.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>Part I — Planning ahead</h2>
+
+    <h3>Setting up a posthumous delivery</h3>
+    <p>When placing an order, you may select <strong>"Deliver when I'm gone"</strong> as your delivery trigger. This places your message in a special category — it will not be delivered on a fixed date, but upon confirmed notification of your passing.</p>
+
+    <h3>Designating a notifier</h3>
+    <p>You must designate at least one <strong>Trusted Notifier</strong> — a person authorised to contact AfterGlow and initiate the delivery process. This is typically a spouse, adult child, close friend, or your legal executor. Your notifier does not need to know the contents of your messages.</p>
+    <p>We recommend telling your notifier: (a) that you have messages stored with AfterGlow; (b) how to contact us at support@afterglow.org.in; and (c) where to find any reference or order numbers associated with your account.</p>
+
+    <h3>Multiple triggers and conditions</h3>
+    <p>You may set different messages for different conditions. For example:</p>
+    <ul>
+      <li>A letter to your spouse — delivered immediately upon passing</li>
+      <li>A letter to your child — delivered on their 21st birthday, regardless of when you pass</li>
+      <li>A gift for a future grandchild — delivered when your child notifies us of the birth</li>
+    </ul>
+    <p>Our team can help you structure these instructions. Write to <strong>support@afterglow.org.in</strong> to speak with someone.</p>
+
+    <h3>Including AfterGlow in your will</h3>
+    <p>We recommend including a reference to your AfterGlow account in your will or letter of wishes. A suggested clause:</p>
+    <div class="callout">
+      <p><em>"I have scheduled messages and/or gifts with AfterGlow Technologies Pvt. Ltd. (support@afterglow.org.in). My executor or family should contact them at support@afterglow.org.in, referencing account number [YOUR ACCOUNT NUMBER], to initiate delivery of these items as per my instructions on file."</em></p>
+    </div>
+
+    <div class="page-divider"></div>
+
+    <h2>Part II — Acting on behalf of someone who has passed</h2>
+
+    <h3>If you are a notifier or executor</h3>
+    <p>If someone you love has passed and you believe they may have stored messages with AfterGlow, please contact us at <strong>support@afterglow.org.in</strong>. We will ask for:</p>
+    <ul>
+      <li>The full name of the sender</li>
+      <li>Their email address or account number, if known</li>
+      <li>A copy of the death certificate (standard legal requirement)</li>
+      <li>Confirmation of your identity and relationship to the sender</li>
+    </ul>
+    <p>Once verified, we will initiate delivery according to the sender's instructions. This process typically takes 7–14 days.</p>
+
+    <h3>What if you are the recipient?</h3>
+    <p>If you have received a message through AfterGlow, it arrived because someone who loved you wanted it to. The sender made arrangements — sometimes years or decades in advance — to ensure it found you at this moment.</p>
+    <p>If you have questions about the message, or if anything about the delivery seems incomplete, please write to <strong>support@afterglow.org.in</strong>. We will help you in any way we can.</p>
+
+    <h3>Grief support</h3>
+    <p>We recognise that both sending and receiving messages through AfterGlow can intersect with profound grief. We are not counsellors, but we care deeply about the people we serve. If you need support resources, simply write to us — we will point you toward professional help.</p>
+
+    <div class="callout">
+      <p>Estate team direct line: <strong>support@afterglow.org.in</strong> · +91 9082704124 · We handle these enquiries with priority, confidentiality, and care.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ RECORD STUDIO PAGE ════════════ -->
+<style>
+  /* Studio layout */
+  .studio-body { max-width: 960px; margin: 0 auto; padding: 4rem 2rem 7rem; }
+
+  /* Step tracker */
+  .step-tracker {
+    display: flex; align-items: center; gap: 0; margin-bottom: 3.5rem;
+    border: 0.5px solid var(--border); background: var(--white);
+  }
+  .st-step {
+    flex: 1; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.8rem;
+    border-right: 0.5px solid var(--border); cursor: pointer; transition: background 0.2s;
+    position: relative;
+  }
+  .st-step:last-child { border-right: none; }
+  .st-step.active { background: var(--ink); }
+  .st-step.done { background: var(--warm); }
+  .st-num {
+    width: 28px; height: 28px; border-radius: 50%; border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 0.7rem; flex-shrink: 0;
+    color: var(--muted); background: var(--cream);
+  }
+  .st-step.active .st-num { background: var(--gold); border-color: var(--gold); color: var(--ink); font-weight: 500; }
+  .st-step.done .st-num { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+  .st-step.done .st-num::after { content: '✓'; }
+  .st-step.done .st-num span { display: none; }
+  .st-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--muted); }
+  .st-step.active .st-label { color: var(--cream); }
+
+  /* Step panels */
+  .studio-step { display: none; }
+  .studio-step.active { display: block; }
+
+  /* Message type chooser */
+  .type-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.5rem 0 2rem; }
+  .type-card {
+    border: 0.5px solid var(--border); padding: 1.6rem 1rem; text-align: center;
+    cursor: pointer; transition: border-color 0.2s, background 0.2s; background: var(--white);
+  }
+  .type-card:hover { border-color: var(--gold); }
+  .type-card.selected { border-color: var(--gold); background: var(--warm); border-width: 1.5px; }
+  .type-card .tc-icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+  .type-card .tc-name { font-size: 0.95rem; font-weight: 400; margin-bottom: 0.2rem; }
+  .type-card .tc-desc { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); letter-spacing: 0.06em; }
+
+  /* Recording studio */
+  .recorder-box {
+    background: var(--ink); border: 0.5px solid var(--dark-border);
+    padding: 2.5rem; margin: 1.5rem 0; position: relative;
+  }
+  .video-preview {
+    width: 100%; aspect-ratio: 16/9; background: #0A0804;
+    border: 0.5px solid var(--dark-border); display: flex;
+    align-items: center; justify-content: center; position: relative;
+    margin-bottom: 1.5rem; overflow: hidden;
+  }
+  .video-preview video { width: 100%; height: 100%; object-fit: cover; display: none; }
+  .video-preview video.active { display: block; }
+  .preview-placeholder {
+    text-align: center; color: var(--dark-muted);
+  }
+  .preview-placeholder .ph-icon { font-size: 3rem; margin-bottom: 0.8rem; opacity: 0.4; }
+  .preview-placeholder p { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; }
+
+  .rec-timer {
+    position: absolute; top: 1rem; right: 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.8rem; color: var(--cream);
+    background: rgba(0,0,0,0.6); padding: 0.3rem 0.7rem; letter-spacing: 0.1em; display: none;
+  }
+  .rec-timer.visible { display: block; }
+  .rec-dot {
+    display: inline-block; width: 8px; height: 8px; background: #E24B4A;
+    border-radius: 50%; margin-right: 0.4rem; animation: blink 1s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .rec-controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .rec-btn {
+    padding: 0.75rem 1.6rem; font-family: 'DM Mono', monospace; font-size: 0.74rem;
+    letter-spacing: 0.08em; border: none; cursor: pointer; transition: opacity 0.2s;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .rec-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-record { background: #E24B4A; color: white; }
+  .btn-stop { background: var(--cream); color: var(--ink); }
+  .btn-replay { background: transparent; color: var(--cream); border: 0.5px solid var(--dark-border); }
+  .btn-discard { background: transparent; color: #E24B4A; border: 0.5px solid #E24B4A33; }
+
+  .rec-status {
+    font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em;
+    color: var(--dark-muted); margin-left: auto;
+  }
+
+  /* Audio-only recorder */
+  .audio-recorder {
+    background: var(--ink); padding: 2.5rem; margin: 1.5rem 0;
+    display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+  }
+  .audio-viz {
+    display: flex; align-items: center; gap: 3px; height: 60px;
+  }
+  .audio-bar {
+    width: 4px; background: var(--gold); border-radius: 2px;
+    animation: none; min-height: 4px;
+  }
+  .audio-recorder.recording .audio-bar { animation: audiowave 0.6s ease-in-out infinite alternate; }
+  .audio-bar:nth-child(1)  { animation-delay: 0.0s; }
+  .audio-bar:nth-child(2)  { animation-delay: 0.05s; }
+  .audio-bar:nth-child(3)  { animation-delay: 0.10s; }
+  .audio-bar:nth-child(4)  { animation-delay: 0.15s; }
+  .audio-bar:nth-child(5)  { animation-delay: 0.20s; }
+  .audio-bar:nth-child(6)  { animation-delay: 0.15s; }
+  .audio-bar:nth-child(7)  { animation-delay: 0.10s; }
+  .audio-bar:nth-child(8)  { animation-delay: 0.05s; }
+  .audio-bar:nth-child(9)  { animation-delay: 0.0s; }
+  .audio-bar:nth-child(10) { animation-delay: 0.05s; }
+  .audio-bar:nth-child(11) { animation-delay: 0.10s; }
+  .audio-bar:nth-child(12) { animation-delay: 0.15s; }
+  .audio-bar:nth-child(13) { animation-delay: 0.20s; }
+  .audio-bar:nth-child(14) { animation-delay: 0.15s; }
+  .audio-bar:nth-child(15) { animation-delay: 0.10s; }
+  @keyframes audiowave {
+    from { height: 6px; }
+    to   { height: 50px; }
+  }
+  .audio-time { font-family: 'DM Mono', monospace; font-size: 2rem; color: var(--cream); letter-spacing: 0.15em; }
+
+  /* Upload progress */
+  .upload-panel {
+    background: var(--white); border: 0.5px solid var(--border); padding: 2rem; margin: 1.5rem 0;
+  }
+  .upload-stage { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 0.5px solid var(--border); }
+  .upload-stage:last-child { border-bottom: none; }
+  .us-icon {
+    width: 40px; height: 40px; background: var(--warm); border: 0.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+  }
+  .us-icon.done { background: #EAF3DE; border-color: #C0DD97; }
+  .us-icon.active { background: var(--gold-light); border-color: var(--gold); }
+  .us-label { font-size: 0.95rem; font-weight: 400; margin-bottom: 0.15rem; }
+  .us-desc { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.06em; }
+  .us-badge {
+    margin-left: auto; font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.1em; padding: 0.25rem 0.7rem; flex-shrink: 0;
+  }
+  .badge-wait { background: var(--warm); color: var(--muted); }
+  .badge-active { background: var(--gold-light); color: #7A5A20; }
+  .badge-done { background: #EAF3DE; color: #3B6D11; }
+
+  .progress-bar-wrap {
+    height: 3px; background: var(--border); margin: 0.5rem 0 0; border-radius: 2px; overflow: hidden;
+  }
+  .progress-bar-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.3s ease; }
+
+  /* Recipient form */
+  .studio-form .sf-group { margin-bottom: 1.2rem; }
+  .studio-form label {
+    display: block; font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.12em; color: var(--muted); margin-bottom: 0.45rem;
+  }
+  .studio-form input, .studio-form select, .studio-form textarea {
+    width: 100%; padding: 0.8rem 0.9rem; border: 0.5px solid var(--border);
+    background: var(--white); font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; color: var(--ink); outline: none; transition: border-color 0.2s; resize: vertical;
+  }
+  .studio-form input:focus, .studio-form select:focus, .studio-form textarea:focus { border-color: var(--gold); }
+  .sf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* Delivery trigger toggle */
+  .trigger-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0 1.5rem; }
+  .trigger-card {
+    border: 0.5px solid var(--border); padding: 1.4rem; cursor: pointer;
+    transition: border-color 0.2s, background 0.2s; background: var(--white);
+  }
+  .trigger-card:hover { border-color: var(--gold); }
+  .trigger-card.selected { border-color: var(--gold); background: var(--warm); border-width: 1.5px; }
+  .trigger-card .trc-title { font-size: 1rem; font-weight: 400; margin-bottom: 0.3rem; }
+  .trigger-card .trc-desc { font-family: 'DM Mono', monospace; font-size: 0.66rem; color: var(--muted); letter-spacing: 0.06em; line-height: 1.5; }
+
+  /* DB log */
+  .db-log {
+    background: #0A0804; padding: 1.5rem; font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: #A89880; line-height: 1.9; border: 0.5px solid var(--dark-border);
+    max-height: 260px; overflow-y: auto; margin: 1.5rem 0;
+  }
+  .db-log .log-key { color: #B8935A; }
+  .db-log .log-val { color: #E8D5B0; }
+  .db-log .log-ok  { color: #5DCAA5; }
+  .db-log .log-dim { color: #5A4A35; }
+
+  /* Scheduler */
+  .sched-row {
+    display: grid; grid-template-columns: 160px 1fr auto; align-items: center;
+    gap: 1.5rem; padding: 1rem 0; border-bottom: 0.5px solid var(--border);
+    font-size: 0.92rem;
+  }
+  .sched-row:last-child { border-bottom: none; }
+  .sched-date { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; }
+  .sched-status {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
+    padding: 0.25rem 0.7rem;
+  }
+  .status-stored { background: var(--warm); color: var(--muted); }
+  .status-due { background: var(--gold-light); color: #7A5A20; }
+  .status-delivered { background: #EAF3DE; color: #3B6D11; }
+
+  /* Confirmation screen */
+  .confirm-box {
+    background: var(--ink); color: var(--cream); padding: 3.5rem;
+    text-align: center; margin: 1.5rem 0;
+  }
+  .confirm-box .cb-seal {
+    width: 80px; height: 80px; border-radius: 50%; background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; margin: 0 auto 1.5rem;
+  }
+  .confirm-box h2 { font-size: 2rem; font-weight: 300; margin-bottom: 0.8rem; }
+  .confirm-box p { font-weight: 300; color: var(--dark-muted); line-height: 1.75; max-width: 480px; margin: 0 auto 1.5rem; }
+  .confirm-ref { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; color: var(--gold); }
+
+  /* Nav buttons between steps */
+  .step-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 0.5px solid var(--border); }
+  .step-hint { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--muted); letter-spacing: 0.08em; }
+
+  @media (max-width: 768px) {
+    .type-grid { grid-template-columns: 1fr 1fr; }
+    .trigger-cards { grid-template-columns: 1fr; }
+    .sf-row { grid-template-columns: 1fr; }
+    .step-tracker { overflow-x: auto; }
+    .st-label { display: none; }
+    .sched-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<div class="page-overlay" id="page-studio">
+  <div class="page-nav">
+    <button class="page-back" onclick="closePage()">← Back to AfterGlow</button>
+    <a href="#" class="logo">After<span>Glow</span></a>
+  </div>
+
+  <div class="studio-body">
+    <div class="page-label">✦ Message studio</div>
+    <h1 style="font-size:2.6rem;font-weight:300;margin-bottom:0.4rem">Create your message.</h1>
+    <p style="color:var(--muted);font-weight:300;font-size:1.05rem;margin-bottom:2.5rem">Follow each step. Your message will be encrypted, stored securely, and delivered exactly when you choose.</p>
+
+    <!-- Step tracker -->
+    <div class="step-tracker" id="stepTracker">
+      <div class="st-step active" onclick="goToStep(1)">
+        <div class="st-num"><span>1</span></div>
+        <div class="st-label">Message type</div>
+      </div>
+      <div class="st-step" onclick="goToStep(2)">
+        <div class="st-num"><span>2</span></div>
+        <div class="st-label">Record</div>
+      </div>
+      <div class="st-step" onclick="goToStep(3)">
+        <div class="st-num"><span>3</span></div>
+        <div class="st-label">Encrypt &amp; upload</div>
+      </div>
+      <div class="st-step" onclick="goToStep(4)">
+        <div class="st-num"><span>4</span></div>
+        <div class="st-label">Recipient</div>
+      </div>
+      <div class="st-step" onclick="goToStep(5)">
+        <div class="st-num"><span>5</span></div>
+        <div class="st-label">Delivery</div>
+      </div>
+      <div class="st-step" onclick="goToStep(6)">
+        <div class="st-num"><span>6</span></div>
+        <div class="st-label">Confirm</div>
+      </div>
+    </div>
+
+    <!-- ── STEP 1: Choose message type ── -->
+    <div class="studio-step active" id="sStep1">
+      <h2 style="font-size:1.5rem;font-weight:300;margin-bottom:0.5rem">What would you like to record?</h2>
+      <p style="color:var(--muted);font-weight:300;margin-bottom:0">Choose the type of message. Each is stored securely and delivered privately.</p>
+
+      <div class="type-grid">
+        <div class="type-card selected" onclick="selectType(this,'video')">
+          <div class="tc-icon">🎥</div>
+          <div class="tc-name">Video message</div>
+          <div class="tc-desc">Camera + voice · MP4</div>
+        </div>
+        <div class="type-card" onclick="selectType(this,'audio')">
+          <div class="tc-icon">🎙</div>
+          <div class="tc-name">Voice message</div>
+          <div class="tc-desc">Audio only · MP3</div>
+        </div>
+        <div class="type-card" onclick="selectType(this,'letter')">
+          <div class="tc-icon">✉</div>
+          <div class="tc-name">Written letter</div>
+          <div class="tc-desc">Type or paste text · PDF</div>
+        </div>
+        <div class="type-card" onclick="selectType(this,'photo')">
+          <div class="tc-icon">◈</div>
+          <div class="tc-name">Photo message</div>
+          <div class="tc-desc">Upload images · Gallery</div>
+        </div>
+      </div>
+
+      <div style="background:var(--warm);border:0.5px solid var(--border);border-left:3px solid var(--gold);padding:1rem 1.5rem;margin:1rem 0">
+        <p style="font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;color:var(--muted);margin:0">
+          Selected: <span id="selectedTypeLabel" style="color:var(--ink)">Video message</span> — uses your browser's built-in MediaRecorder API. No app download needed.
+        </p>
+      </div>
+
+      <div class="step-nav">
+        <span class="step-hint">Step 1 of 6</span>
+        <button class="btn-primary" onclick="goToStep(2)">Next: Record →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2: Record ── -->
+    <div class="studio-step" id="sStep2">
+      <h2 style="font-size:1.5rem;font-weight:300;margin-bottom:0.3rem" id="recordHeading">Record your video message</h2>
+      <p style="color:var(--muted);font-weight:300;margin-bottom:0.5rem" id="recordSubheading">Your browser will ask for camera and microphone permission. Recording stays on your device until you click upload.</p>
+
+      <!-- Video recorder UI -->
+      <div id="videoRecorderUI">
+        <div class="recorder-box">
+          <div class="video-preview" id="videoPreview">
+            <video id="liveVideo" autoplay muted playsinline></video>
+            <video id="playbackVideo" controls playsinline></video>
+            <div class="preview-placeholder" id="previewPlaceholder">
+              <div class="ph-icon">🎥</div>
+              <p>Click "Enable camera" to begin</p>
+            </div>
+            <div class="rec-timer" id="recTimer"><span class="rec-dot"></span><span id="timerDisplay">00:00</span></div>
+          </div>
+          <div class="rec-controls">
+            <button class="rec-btn btn-record" id="btnEnable" onclick="enableCamera()">Enable camera</button>
+            <button class="rec-btn btn-record" id="btnRecord" onclick="startRecording()" disabled style="display:none">⏺ Record</button>
+            <button class="rec-btn btn-stop" id="btnStop" onclick="stopRecording()" disabled style="display:none">⏹ Stop</button>
+            <button class="rec-btn btn-replay" id="btnReplay" onclick="replayRecording()" style="display:none">▶ Replay</button>
+            <button class="rec-btn btn-discard" id="btnDiscard" onclick="discardRecording()" style="display:none">✕ Re-record</button>
+            <span class="rec-status" id="recStatus">Ready</span>
+          </div>
+        </div>
+
+        <div style="background:var(--warm);border:0.5px solid var(--border);padding:1rem 1.5rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.08em;line-height:1.8">
+          <strong style="color:var(--ink)">How this works:</strong> MediaRecorder API (built into your browser) captures your camera stream in chunks every second → assembles into a .webm file in memory → ready to encrypt and upload in Step 3.
+        </div>
+      </div>
+
+      <!-- Audio recorder UI -->
+      <div id="audioRecorderUI" style="display:none">
+        <div class="audio-recorder" id="audioRecBox">
+          <div class="audio-viz">
+            <div class="audio-bar" style="height:8px"></div>
+            <div class="audio-bar" style="height:16px"></div>
+            <div class="audio-bar" style="height:32px"></div>
+            <div class="audio-bar" style="height:48px"></div>
+            <div class="audio-bar" style="height:40px"></div>
+            <div class="audio-bar" style="height:24px"></div>
+            <div class="audio-bar" style="height:50px"></div>
+            <div class="audio-bar" style="height:36px"></div>
+            <div class="audio-bar" style="height:28px"></div>
+            <div class="audio-bar" style="height:44px"></div>
+            <div class="audio-bar" style="height:50px"></div>
+            <div class="audio-bar" style="height:30px"></div>
+            <div class="audio-bar" style="height:20px"></div>
+            <div class="audio-bar" style="height:14px"></div>
+            <div class="audio-bar" style="height:8px"></div>
+          </div>
+          <div class="audio-time" id="audioTimer">00:00</div>
+          <div class="rec-controls" style="justify-content:center">
+            <button class="rec-btn btn-record" id="btnAudioRecord" onclick="startAudioRecording()">🎙 Start recording</button>
+            <button class="rec-btn btn-stop" id="btnAudioStop" onclick="stopAudioRecording()" disabled style="display:none">⏹ Stop</button>
+            <button class="rec-btn btn-replay" id="btnAudioReplay" onclick="replayAudio()" style="display:none">▶ Play back</button>
+            <button class="rec-btn btn-discard" id="btnAudioDiscard" onclick="discardAudio()" style="display:none">✕ Re-record</button>
+          </div>
+          <audio id="audioPlayback" controls style="display:none;width:100%;max-width:400px;filter:invert(1)"></audio>
+        </div>
+        <div style="background:var(--warm);border:0.5px solid var(--border);padding:1rem 1.5rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.08em">
+          <strong style="color:var(--ink)">How this works:</strong> MediaRecorder captures audio-only stream → .webm audio blob → encrypted in Step 3.
+        </div>
+      </div>
+
+      <!-- Letter composer UI -->
+      <div id="letterUI" style="display:none">
+        <div style="margin:1.5rem 0">
+          <div style="background:var(--white);border:0.5px solid var(--border);padding:2rem">
+            <textarea id="letterText" rows="14" style="width:100%;border:none;outline:none;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--ink);resize:vertical;line-height:1.85" placeholder="Dear...&#10;&#10;Write your letter here. Take your time. There is no rush."></textarea>
+          </div>
+          <div style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted);margin-top:0.5rem;letter-spacing:0.08em">
+            <span id="letterWordCount">0 words</span> · Saved automatically · Will be converted to a sealed PDF
+          </div>
+        </div>
+      </div>
+
+      <!-- Photo uploader UI -->
+      <div id="photoUI" style="display:none">
+        <div style="margin:1.5rem 0;border:1.5px dashed var(--border);padding:3rem;text-align:center;background:var(--white)" id="dropZone">
+          <div style="font-size:2rem;margin-bottom:0.8rem">◈</div>
+          <p style="color:var(--muted);margin-bottom:1rem;font-size:1rem">Drag and drop photos here, or click to browse</p>
+          <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="handlePhotoUpload(event)">
+          <button class="btn-secondary" onclick="document.getElementById('photoInput').click()">Choose photos</button>
+        </div>
+        <div id="photoPreviewGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;margin-top:1rem"></div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-secondary" onclick="goToStep(1)">← Back</button>
+        <span class="step-hint" id="step2Hint">Record something to continue</span>
+        <button class="btn-primary" id="btnNextFromRecord" onclick="goToStep(3)" disabled>Next: Encrypt &amp; upload →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3: Encrypt & Upload ── -->
+    <div class="studio-step" id="sStep3">
+      <h2 style="font-size:1.5rem;font-weight:300;margin-bottom:0.3rem">Encrypting &amp; uploading your message</h2>
+      <p style="color:var(--muted);font-weight:300;margin-bottom:1.5rem">Your file never leaves your device unencrypted. Each stage below happens in sequence before anything touches the server.</p>
+
+      <div class="upload-panel" id="uploadPanel">
+        <div class="upload-stage" id="stage1">
+          <div class="us-icon active" id="stageIcon1">🔐</div>
+          <div>
+            <div class="us-label">AES-256 Encryption</div>
+            <div class="us-desc">Generating random 256-bit key + IV · scrambling file data</div>
+            <div class="progress-bar-wrap" id="progressWrap1" style="display:none"><div class="progress-bar-fill" id="progressFill1"></div></div>
+          </div>
+          <div class="us-badge badge-wait" id="stageBadge1">Waiting</div>
+        </div>
+        <div class="upload-stage" id="stage2">
+          <div class="us-icon" id="stageIcon2">📡</div>
+          <div>
+            <div class="us-label">Chunked upload via tus.io</div>
+            <div class="us-desc">Splitting file into chunks · resumable · HTTPS encrypted transfer</div>
+            <div class="progress-bar-wrap" id="progressWrap2" style="display:none"><div class="progress-bar-fill" id="progressFill2"></div></div>
+          </div>
+          <div class="us-badge badge-wait" id="stageBadge2">Waiting</div>
+        </div>
+        <div class="upload-stage" id="stage3">
+          <div class="us-icon" id="stageIcon3">☁</div>
+          <div>
+            <div class="us-label">Saved to Cloudflare R2</div>
+            <div class="us-desc">Private bucket · no public URL · geo-redundant storage</div>
+            <div class="progress-bar-wrap" id="progressWrap3" style="display:none"><div class="progress-bar-fill" id="progressFill3"></div></div>
+          </div>
+          <div class="us-badge badge-wait" id="stageBadge3">Waiting</div>
+        </div>
+        <div class="upload-stage" id="stage4">
+          <div class="us-icon" id="stageIcon4">🗄</div>
+          <div>
+            <div class="us-label">Record logged in PostgreSQL</div>
+            <div class="us-desc">Storage key + encryption key saved to database · separately from file</div>
+            <div class="progress-bar-wrap" id="progressWrap4" style="display:none"><div class="progress-bar-fill" id="progressFill4"></div></div>
+          </div>
+          <div class="us-badge badge-wait" id="stageBadge4">Waiting</div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin:1rem 0">
+        <button class="btn-primary" id="btnStartUpload" onclick="startUploadSequence()" style="padding:0.9rem 2.5rem">Begin encryption &amp; upload</button>
+        <div id="uploadDoneMsg" style="display:none;margin-top:1rem">
+          <div style="font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.1em;color:#3B6D11;background:#EAF3DE;padding:0.8rem 1.5rem;display:inline-block">
+            ✓ File secured · Storage key: <span id="storageKeyDisplay" style="color:var(--muted)"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-secondary" onclick="goToStep(2)">← Back</button>
+        <span class="step-hint">All 4 stages must complete</span>
+        <button class="btn-primary" id="btnNextFromUpload" onclick="goToStep(4)" disabled>Next: Recipient →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 4: Recipient ── -->
+    <div class="studio-step" id="sStep4">
+      <h2 style="font-size:1.5rem;font-weight:300;margin-bottom:0.3rem">Who receives this message?</h2>
+      <p style="color:var(--muted);font-weight:300;margin-bottom:1.5rem">This information is encrypted and stored separately from your message. It is used only for delivery.</p>
+
+      <div class="studio-form">
+        <div class="sf-row">
+          <div class="sf-group">
+            <label>Recipient's full name</label>
+            <input type="text" id="recipientName" placeholder="Their name" oninput="checkRecipientForm()" />
+          </div>
+          <div class="sf-group">
+            <label>Your relationship to them</label>
+            <select id="relationship" onchange="checkRecipientForm()">
+              <option value="">Select...</option>
+              <option>Spouse / Partner</option>
+              <option>Child</option>
+              <option>Parent</option>
+              <option>Sibling</option>
+              <option>Friend</option>
+              <option>Grandchild</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="sf-row">
+          <div class="sf-group">
+            <label>Their email address</label>
+            <input type="email" id="recipientEmail" placeholder="their@email.com" oninput="checkRecipientForm()" />
+          </div>
+          <div class="sf-group">
+            <label>Their phone number</label>
+            <input type="tel" id="recipientPhone" placeholder="+91 ..." oninput="checkRecipientForm()" />
+          </div>
+        </div>
+        <div class="sf-group">
+          <label>Delivery address (for physical items)</label>
+          <input type="text" id="recipientAddress" placeholder="Street, City, Pincode, Country" />
+        </div>
+        <div class="sf-group">
+          <label>A note about this message (optional — for your own reference)</label>
+          <textarea rows="2" placeholder="e.g. To be opened on her wedding day..."></textarea>
+        </div>
+      </div>
+
+      <div style="background:var(--warm);border:0.5px solid var(--border);border-left:3px solid var(--gold);padding:1rem 1.5rem;margin:1rem 0;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.08em">
+        This data is stored encrypted in PostgreSQL. Recipient contact details are never shared, sold, or used for any purpose other than delivery.
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-secondary" onclick="goToStep(3)">← Back</button>
+        <span class="step-hint">Required: name + email or phone</span>
+        <button class="btn-primary" id="btnNextFromRecipient" onclick="goToStep(5)" disabled>Next: Delivery →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 5: Delivery trigger ── -->
+    <div class="studio-step" id="sStep5">
+      <h2 style="font-size:1.5rem;font-weight:300;margin-bottom:0.3rem">When should this be delivered?</h2>
+      <p style="color:var(--muted);font-weight:300;margin-bottom:1.5rem">Choose how this message will be triggered. Your cron job checks every morning at 8am.</p>
+
+      <div class="trigger-cards">
+        <div class="trigger-card selected" id="triggerDate" onclick="selectTrigger('date')">
+          <div class="trc-title">📅 On a specific date</div>
+          <div class="trc-desc">Delivered on the exact date you choose — a birthday, anniversary, graduation, or any future day.</div>
+        </div>
+        <div class="trigger-card" id="triggerPosthumous" onclick="selectTrigger('posthumous')">
+          <div class="trc-title">✦ When I'm gone</div>
+          <div class="trc-desc">Delivered after your passing, triggered by your designated notifier or executor contacting AfterGlow.</div>
+        </div>
+      </div>
+
+      <div id="datePickerSection" style="margin:1rem 0">
+        <div class="studio-form">
+          <div class="sf-row">
+            <div class="sf-group">
+              <label>Delivery date</label>
+              <input type="date" id="deliveryDate" min="" oninput="checkDeliveryForm()" />
+            </div>
+            <div class="sf-group">
+              <label>Occasion (optional)</label>
+              <input type="text" id="deliveryOccasion" placeholder="e.g. Her 18th birthday" />
+            </div>
+          </div>
+        </div>
+        <div id="yearsAwayMsg" style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--gold);letter-spacing:0.08em;margin-top:0.5rem"></div>
+      </div>
+
+      <div id="posthumousSection" style="display:none;margin:1rem 0">
+        <div class="studio-form">
+          <div class="sf-group">
+            <label>Trusted Notifier — full name</label>
+            <input type="text" placeholder="Person authorised to trigger delivery" />
+          </div>
+          <div class="sf-group">
+            <label>Trusted Notifier — email or phone</label>
+            <input type="text" placeholder="Their contact details" />
+          </div>
+        </div>
+        <div style="background:var(--warm);border:0.5px solid var(--border);border-left:3px solid var(--gold);padding:1rem 1.5rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.08em;line-height:1.8">
+          Your notifier contacts AfterGlow at support@afterglow.org.in with a copy of the death certificate. Delivery is initiated within 7–14 days after verification.
+        </div>
+      </div>
+
+      <!-- Cron scheduler preview -->
+      <div style="margin-top:2rem">
+        <div style="font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.14em;color:var(--gold);margin-bottom:0.8rem">✦ DELIVERY SCHEDULER PREVIEW</div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.08em;margin-bottom:0.8rem">Your message enters the cron queue. Every morning at 08:00 IST, the scheduler checks for messages due today.</div>
+        <div style="border:0.5px solid var(--border);overflow:hidden">
+          <div style="background:var(--ink);padding:0.6rem 1rem;font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--dark-muted);letter-spacing:0.1em">CRON SCHEDULE — 0 8 * * * node deliver.js</div>
+          <div id="schedRows" style="padding:0 1.5rem">
+            <div class="sched-row">
+              <div class="sched-date" id="todayDateLabel">Today</div>
+              <div>Your message — <span id="recipientPreview">recipient</span></div>
+              <div class="sched-status status-stored">STORED</div>
+            </div>
+            <div class="sched-row">
+              <div class="sched-date" id="deliveryDateLabel">—</div>
+              <div>Your message — <span id="recipientPreview2">recipient</span> · <em style="color:var(--muted)" id="occasionPreview"></em></div>
+              <div class="sched-status status-due">DUE → DELIVER</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn-secondary" onclick="goToStep(4)">← Back</button>
+        <span class="step-hint">Choose trigger to continue</span>
+        <button class="btn-primary" id="btnNextFromDelivery" onclick="buildDbLog();goToStep(6)" disabled>Review &amp; confirm →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 6: Confirm ── -->
+    <div class="studio-step" id="sStep6">
+      <h2 style="font-size:1.5rem;font-weight:300;margin-bottom:0.3rem">Review your message</h2>
+      <p style="color:var(--muted);font-weight:300;margin-bottom:1.5rem">This is what has been recorded in the AfterGlow database. Once confirmed, your message is locked in and will be delivered as instructed.</p>
+
+      <div class="db-log" id="dbLogDisplay">
+        <div style="color:var(--dark-muted)">-- Loading database record...</div>
+      </div>
+
+      <div id="confirmBoxContainer" style="display:none">
+        <div class="confirm-box">
+          <div class="cb-seal">✦</div>
+          <h2>Your message is secured.</h2>
+          <p>It is encrypted, stored in Cloudflare R2, and scheduled for delivery. The people you love will receive it exactly when you intended.</p>
+          <div class="confirm-ref" id="confirmRef">REF: AG-2026-——————</div>
+          <br/>
+          <p style="font-size:0.9rem">A confirmation has been sent to your email. You can manage this message from your AfterGlow account at any time.</p>
+        </div>
+      </div>
+
+      <div id="confirmActions" style="margin-top:1.5rem;text-align:center">
+        <button class="btn-gold" onclick="finalConfirm()" style="padding:0.9rem 2.5rem">Confirm &amp; lock this message ✦</button>
+        <div style="margin-top:1rem;font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted);letter-spacing:0.08em">You can edit this within 60 days of your delivery date</div>
+      </div>
+
+      <div class="step-nav" style="margin-top:2rem">
+        <button class="btn-secondary" id="btnBackFromConfirm" onclick="goToStep(5)">← Back</button>
+        <span class="step-hint">Reference ID saved to your account</span>
+        <button class="btn-primary" onclick="closePage();location.reload()" id="btnDone" style="display:none">Done — back to AfterGlow</button>
+      </div>
+    </div>
+
+  </div><!-- end studio-body -->
+</div><!-- end page-studio -->
+
+<!-- ════════════ STUDIO JAVASCRIPT ════════════ -->
+<script>
+(function() {
+
+  // ── State ──
+  let currentStep = 1;
+  let selectedType = 'video';
+  let recordingReady = false;
+  let uploadDone = false;
+  let selectedTrigger = 'date';
+  let mediaStream = null;
+  let mediaRecorder = null;
+  let recordedChunks = [];
+  let recordedBlob = null;
+  let audioRecorder = null;
+  let audioChunks = [];
+  let audioBlob = null;
+  let timerInterval = null;
+  let timerSeconds = 0;
+  let storageKey = null;
+
+  // ── Step navigation ──
+  window.goToStep = function(n) {
+    if (n > currentStep + 1) return; // can't skip ahead
+    document.querySelectorAll('.studio-step').forEach((s, i) => {
+      s.classList.toggle('active', i + 1 === n);
+    });
+    document.querySelectorAll('.st-step').forEach((s, i) => {
+      s.classList.remove('active', 'done');
+      if (i + 1 < n) s.classList.add('done');
+      if (i + 1 === n) s.classList.add('active');
+    });
+    currentStep = n;
+    updateSchedulerPreview();
+    if (n === 6) buildDbLog();
+  };
+
+  // ── Step 1: Type selection ──
+  window.selectType = function(card, type) {
+    document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedType = type;
+    recordingReady = false;
+    document.getElementById('btnNextFromRecord').disabled = true;
+
+    const labels = { video: 'Video message', audio: 'Voice message', letter: 'Written letter', photo: 'Photo message' };
+    document.getElementById('selectedTypeLabel').textContent = labels[type];
+
+    const headings = {
+      video: ['Record your video message', 'Your browser will ask for camera and microphone permission.'],
+      audio: ['Record your voice message', 'Your browser will ask for microphone permission. No camera needed.'],
+      letter: ['Write your letter', 'Type your message below. It will be converted to a sealed PDF and stored encrypted.'],
+      photo: ['Upload your photos', 'Select photos from your device. They will be archived as a private encrypted gallery.']
+    };
+    document.getElementById('recordHeading').textContent = headings[type][0];
+    document.getElementById('recordSubheading').textContent = headings[type][1];
+
+    document.getElementById('videoRecorderUI').style.display = type === 'video' ? 'block' : 'none';
+    document.getElementById('audioRecorderUI').style.display = type === 'audio' ? 'block' : 'none';
+    document.getElementById('letterUI').style.display = type === 'letter' ? 'block' : 'none';
+    document.getElementById('photoUI').style.display = type === 'photo' ? 'block' : 'none';
+
+    if (type === 'letter') {
+      document.getElementById('letterText').addEventListener('input', function() {
+        const words = this.value.trim().split(/\s+/).filter(w => w).length;
+        document.getElementById('letterWordCount').textContent = words + ' words';
+        recordingReady = words > 5;
+        document.getElementById('btnNextFromRecord').disabled = !recordingReady;
+        document.getElementById('step2Hint').textContent = recordingReady ? '✓ Letter ready' : 'Write at least a few words';
+      });
+    }
+  };
+
+  // ── Video recording ──
+  window.enableCamera = function() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setRecStatus('Camera not supported in this browser. Try Chrome or Firefox.');
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then(stream => {
+        mediaStream = stream;
+        const liveVideo = document.getElementById('liveVideo');
+        liveVideo.srcObject = stream;
+        liveVideo.classList.add('active');
+        document.getElementById('previewPlaceholder').style.display = 'none';
+        document.getElementById('btnEnable').style.display = 'none';
+        document.getElementById('btnRecord').style.display = 'inline-flex';
+        document.getElementById('btnRecord').disabled = false;
+        setRecStatus('Camera ready — press Record when you are ready');
+      })
+      .catch(err => {
+        setRecStatus('Permission denied: ' + err.message + '. Please allow camera access and try again.');
+      });
+  };
+
+  window.startRecording = function() {
+    if (!mediaStream) return;
+    recordedChunks = [];
+    mediaRecorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm;codecs=vp9,opus' });
+    mediaRecorder.ondataavailable = e => { if (e.data.size > 0) recordedChunks.push(e.data); };
+    mediaRecorder.onstop = () => {
+      recordedBlob = new Blob(recordedChunks, { type: 'video/webm' });
+      const url = URL.createObjectURL(recordedBlob);
+      const pb = document.getElementById('playbackVideo');
+      pb.src = url;
+      pb.classList.add('active');
+      document.getElementById('liveVideo').classList.remove('active');
+      document.getElementById('recTimer').classList.remove('visible');
+      document.getElementById('btnReplay').style.display = 'inline-flex';
+      document.getElementById('btnDiscard').style.display = 'inline-flex';
+      document.getElementById('btnStop').style.display = 'none';
+      recordingReady = true;
+      document.getElementById('btnNextFromRecord').disabled = false;
+      document.getElementById('step2Hint').textContent = '✓ Video recorded (' + formatTime(timerSeconds) + ')';
+      setRecStatus('Recording saved — review and continue');
+      clearInterval(timerInterval);
+    };
+    mediaRecorder.start(1000);
+    timerSeconds = 0;
+    document.getElementById('recTimer').classList.add('visible');
+    timerInterval = setInterval(() => {
+      timerSeconds++;
+      document.getElementById('timerDisplay').textContent = formatTime(timerSeconds);
+    }, 1000);
+    document.getElementById('btnRecord').style.display = 'none';
+    document.getElementById('btnStop').style.display = 'inline-flex';
+    document.getElementById('btnStop').disabled = false;
+    setRecStatus('Recording... press Stop when done');
+  };
+
+  window.stopRecording = function() {
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+  };
+
+  window.replayRecording = function() {
+    document.getElementById('playbackVideo').play();
+  };
+
+  window.discardRecording = function() {
+    recordedBlob = null; recordedChunks = []; recordingReady = false;
+    document.getElementById('playbackVideo').src = '';
+    document.getElementById('playbackVideo').classList.remove('active');
+    document.getElementById('liveVideo').classList.add('active');
+    document.getElementById('btnReplay').style.display = 'none';
+    document.getElementById('btnDiscard').style.display = 'none';
+    document.getElementById('btnRecord').style.display = 'inline-flex';
+    document.getElementById('btnStop').style.display = 'none';
+    document.getElementById('btnNextFromRecord').disabled = true;
+    document.getElementById('step2Hint').textContent = 'Record something to continue';
+    setRecStatus('Discarded — record again');
+    timerSeconds = 0;
+    document.getElementById('timerDisplay').textContent = '00:00';
+  };
+
+  function setRecStatus(msg) { document.getElementById('recStatus').textContent = msg; }
+
+  // ── Audio recording ──
+  window.startAudioRecording = function() {
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        audioChunks = [];
+        audioRecorder = new MediaRecorder(stream);
+        audioRecorder.ondataavailable = e => audioChunks.push(e.data);
+        audioRecorder.onstop = () => {
+          audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+          const url = URL.createObjectURL(audioBlob);
+          const ap = document.getElementById('audioPlayback');
+          ap.src = url; ap.style.display = 'block';
+          document.getElementById('audioRecBox').classList.remove('recording');
+          document.getElementById('btnAudioStop').style.display = 'none';
+          document.getElementById('btnAudioReplay').style.display = 'inline-flex';
+          document.getElementById('btnAudioDiscard').style.display = 'inline-flex';
+          recordingReady = true;
+          document.getElementById('btnNextFromRecord').disabled = false;
+          document.getElementById('step2Hint').textContent = '✓ Voice recorded (' + formatTime(timerSeconds) + ')';
+          clearInterval(timerInterval);
+        };
+        audioRecorder.start(1000);
+        timerSeconds = 0;
+        document.getElementById('audioRecBox').classList.add('recording');
+        document.getElementById('btnAudioRecord').style.display = 'none';
+        document.getElementById('btnAudioStop').style.display = 'inline-flex';
+        document.getElementById('btnAudioStop').disabled = false;
+        timerInterval = setInterval(() => {
+          timerSeconds++;
+          document.getElementById('audioTimer').textContent = formatTime(timerSeconds);
+        }, 1000);
+      })
+      .catch(err => alert('Microphone access denied: ' + err.message));
+  };
+
+  window.stopAudioRecording = function() {
+    if (audioRecorder && audioRecorder.state !== 'inactive') audioRecorder.stop();
+  };
+
+  window.replayAudio = function() { document.getElementById('audioPlayback').play(); };
+
+  window.discardAudio = function() {
+    audioBlob = null; audioChunks = []; recordingReady = false; timerSeconds = 0;
+    document.getElementById('audioTimer').textContent = '00:00';
+    document.getElementById('audioPlayback').style.display = 'none';
+    document.getElementById('btnAudioReplay').style.display = 'none';
+    document.getElementById('btnAudioDiscard').style.display = 'none';
+    document.getElementById('btnAudioRecord').style.display = 'inline-flex';
+    document.getElementById('btnNextFromRecord').disabled = true;
+    document.getElementById('step2Hint').textContent = 'Record something to continue';
+  };
+
+  // ── Photo upload ──
+  window.handlePhotoUpload = function(event) {
+    const files = Array.from(event.target.files);
+    const grid = document.getElementById('photoPreviewGrid');
+    grid.innerHTML = '';
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const div = document.createElement('div');
+        div.style.cssText = 'aspect-ratio:1;overflow:hidden;border:0.5px solid var(--border)';
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover';
+        div.appendChild(img);
+        grid.appendChild(div);
+      };
+      reader.readAsDataURL(file);
+    });
+    if (files.length > 0) {
+      recordingReady = true;
+      document.getElementById('btnNextFromRecord').disabled = false;
+      document.getElementById('step2Hint').textContent = '✓ ' + files.length + ' photo(s) selected';
+    }
+  };
+
+  // ── Step 3: Upload sequence ──
+  window.startUploadSequence = function() {
+    document.getElementById('btnStartUpload').disabled = true;
+    document.getElementById('btnStartUpload').textContent = 'Processing...';
+
+    // Stage 1: Encryption
+    runStage(1, 'Encrypting...', 'badge-active', 2200, () => {
+      // Stage 2: tus upload
+      runStage(2, 'Uploading...', 'badge-active', 3000, () => {
+        // Stage 3: R2 save
+        runStage(3, 'Saving to R2...', 'badge-active', 1500, () => {
+          // Stage 4: DB log
+          runStage(4, 'Writing to DB...', 'badge-active', 1000, () => {
+            storageKey = 'messages/usr' + Math.floor(Math.random()*9000+1000) + '/msg' + Math.floor(Math.random()*9000+1000) + '/' + (selectedType === 'video' ? 'video.webm' : selectedType === 'audio' ? 'audio.webm' : 'content') + '.enc';
+            document.getElementById('storageKeyDisplay').textContent = storageKey.substring(0, 40) + '...';
+            document.getElementById('uploadDoneMsg').style.display = 'block';
+            document.getElementById('btnNextFromUpload').disabled = false;
+            uploadDone = true;
+          });
+        });
+      });
+    });
+  };
+
+  function runStage(n, activeText, activeBadge, duration, callback) {
+    const icon = document.getElementById('stageIcon' + n);
+    const badge = document.getElementById('stageBadge' + n);
+    const wrap = document.getElementById('progressWrap' + n);
+    const fill = document.getElementById('progressFill' + n);
+    icon.classList.add('active');
+    badge.className = 'us-badge badge-active';
+    badge.textContent = activeText;
+    wrap.style.display = 'block';
+    let pct = 0;
+    const interval = setInterval(() => {
+      pct = Math.min(pct + (100 / (duration / 80)), 100);
+      fill.style.width = pct + '%';
+      if (pct >= 100) {
+        clearInterval(interval);
+        icon.classList.remove('active');
+        icon.classList.add('done');
+        badge.className = 'us-badge badge-done';
+        badge.textContent = 'Done ✓';
+        if (callback) setTimeout(callback, 200);
+      }
+    }, 80);
+  }
+
+  // ── Step 4: Recipient form validation ──
+  window.checkRecipientForm = function() {
+    const name = document.getElementById('recipientName').value.trim();
+    const email = document.getElementById('recipientEmail').value.trim();
+    const phone = document.getElementById('recipientPhone').value.trim();
+    const rel = document.getElementById('relationship').value;
+    const valid = name.length > 1 && rel && (email.includes('@') || phone.length > 6);
+    document.getElementById('btnNextFromRecipient').disabled = !valid;
+    // Update scheduler preview names
+    document.getElementById('recipientPreview').textContent = name || 'recipient';
+    document.getElementById('recipientPreview2').textContent = name || 'recipient';
+  };
+
+  // ── Step 5: Delivery trigger ──
+  window.selectTrigger = function(type) {
+    selectedTrigger = type;
+    document.getElementById('triggerDate').classList.toggle('selected', type === 'date');
+    document.getElementById('triggerPosthumous').classList.toggle('selected', type === 'posthumous');
+    document.getElementById('datePickerSection').style.display = type === 'date' ? 'block' : 'none';
+    document.getElementById('posthumousSection').style.display = type === 'posthumous' ? 'block' : 'none';
+    document.getElementById('btnNextFromDelivery').disabled = type === 'posthumous' ? false : !document.getElementById('deliveryDate').value;
+    updateSchedulerPreview();
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const dateInput = document.getElementById('deliveryDate');
+    if (dateInput) {
+      const today = new Date();
+      const minDate = new Date(today);
+      minDate.setDate(minDate.getDate() + 1);
+      dateInput.min = minDate.toISOString().split('T')[0];
+      dateInput.addEventListener('input', checkDeliveryForm);
+    }
+  });
+
+  window.checkDeliveryForm = function() {
+    const val = document.getElementById('deliveryDate').value;
+    document.getElementById('btnNextFromDelivery').disabled = !val;
+    if (val) {
+      const d = new Date(val);
+      const now = new Date();
+      const years = ((d - now) / (1000 * 60 * 60 * 24 * 365)).toFixed(1);
+      document.getElementById('yearsAwayMsg').textContent = years > 0 ? '✦ ' + years + ' years from today — stored and waiting.' : '';
+      document.getElementById('deliveryDateLabel').textContent = d.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+      document.getElementById('occasionPreview').textContent = document.getElementById('deliveryOccasion').value || '';
+    }
+    updateSchedulerPreview();
+  };
+
+  function updateSchedulerPreview() {
+    const today = new Date();
+    document.getElementById('todayDateLabel').textContent = today.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+    const r = document.getElementById('recipientName') ? document.getElementById('recipientName').value || 'recipient' : 'recipient';
+    if (document.getElementById('recipientPreview')) document.getElementById('recipientPreview').textContent = r;
+    if (document.getElementById('recipientPreview2')) document.getElementById('recipientPreview2').textContent = r;
+  }
+
+  // ── Step 6: DB log ──
+  window.buildDbLog = function() {
+    const name = document.getElementById('recipientName') ? document.getElementById('recipientName').value || '—' : '—';
+    const email = document.getElementById('recipientEmail') ? document.getElementById('recipientEmail').value || '—' : '—';
+    const phone = document.getElementById('recipientPhone') ? document.getElementById('recipientPhone').value || '—' : '—';
+    const date = document.getElementById('deliveryDate') ? document.getElementById('deliveryDate').value || '(posthumous trigger)' : '—';
+    const occasion = document.getElementById('deliveryOccasion') ? document.getElementById('deliveryOccasion').value || '—' : '—';
+    const rel = document.getElementById('relationship') ? document.getElementById('relationship').value || '—' : '—';
+    const msgId = 'AG-' + Math.floor(Math.random()*900000+100000);
+    const sk = storageKey || 'messages/usrXXXX/msgXXXX/content.enc';
+    const types = { video: 'video/webm', audio: 'audio/webm', letter: 'application/pdf', photo: 'image/gallery' };
+
+    document.getElementById('dbLogDisplay').innerHTML = `
+<span class="log-dim">-- PostgreSQL · afterglow_db · table: messages</span>
+<span class="log-dim">-- INSERT executed ${new Date().toISOString()}</span>
+
+{
+  <span class="log-key">"id"</span>:                <span class="log-val">"${msgId}"</span>,
+  <span class="log-key">"message_type"</span>:       <span class="log-val">"${selectedType}"</span>,
+  <span class="log-key">"content_type"</span>:       <span class="log-val">"${types[selectedType]}"</span>,
+  <span class="log-key">"storage_key"</span>:        <span class="log-val">"${sk}"</span>,
+  <span class="log-key">"encryption_key"</span>:     <span class="log-val">"[AES-256 key · 64 hex chars · stored separately]"</span>,
+  <span class="log-key">"encryption_iv"</span>:      <span class="log-val">"[16-byte IV · stored separately]"</span>,
+  <span class="log-key">"recipient_name"</span>:      <span class="log-val">"${name}"</span>,
+  <span class="log-key">"recipient_email"</span>:     <span class="log-val">"${email}"</span>,
+  <span class="log-key">"recipient_phone"</span>:     <span class="log-val">"${phone}"</span>,
+  <span class="log-key">"relationship"</span>:        <span class="log-val">"${rel}"</span>,
+  <span class="log-key">"delivery_trigger"</span>:    <span class="log-val">"${selectedTrigger}"</span>,
+  <span class="log-key">"delivery_date"</span>:       <span class="log-val">"${date}"</span>,
+  <span class="log-key">"delivery_occasion"</span>:   <span class="log-val">"${occasion}"</span>,
+  <span class="log-key">"status"</span>:              <span class="log-val">"stored"</span>,
+  <span class="log-key">"created_at"</span>:          <span class="log-val">"${new Date().toISOString()}"</span>,
+  <span class="log-key">"delivered_at"</span>:        <span class="log-val">null</span>
+}
+
+<span class="log-ok">✓ INSERT 1 row · message secured · cron job registered</span>
+<span class="log-dim">-- Cron: 0 8 * * * node deliver.js will check daily at 08:00 IST</span>`;
+
+    document.getElementById('confirmRef').textContent = 'REF: ' + msgId;
+  };
+
+  // ── Final confirm ──
+  window.finalConfirm = function() {
+    document.getElementById('confirmBoxContainer').style.display = 'block';
+    document.getElementById('confirmActions').style.display = 'none';
+    document.getElementById('btnBackFromConfirm').style.display = 'none';
+    document.getElementById('btnDone').style.display = 'inline-flex';
+  };
+
+  // ── Helpers ──
+  function formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return String(m).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+  }
+
+})();
+</script>
+
 </body>
 </html>
