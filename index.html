@@ -2863,7 +2863,7 @@
       <div class="step-nav">
         <button class="btn-secondary" onclick="goToStep(4)">← Back</button>
         <span class="step-hint">Choose trigger to continue</span>
-        <button class="btn-primary" id="btnNextFromDelivery" onclick="buildDbLog();goToStep(6)" disabled>Review &amp; confirm →</button>
+        <button class="btn-primary" id="btnNextFromDelivery" onclick="saveToSupabase();buildDbLog();goToStep(6)" disabled>Review &amp; confirm →</button>
       </div>
     </div>
 
@@ -2903,8 +2903,22 @@
 </div><!-- end page-studio -->
 
 <!-- ════════════ STUDIO JAVASCRIPT ════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 (function() {
+
+  // ── Supabase client ──
+  const SUPA_URL = 'https://gjohuirwxoehkcrddhep.supabase.co';
+  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdqb2h1aXJ3eG9laGtjcmRkaGVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNTE4MzksImV4cCI6MjA5MDkyNzgzOX0.WFmHX7M-KEN58G2Q-omxrb6usUskeTxvWDvN_HCrzOw';
+  let supabase = null;
+
+  function getSupabase() {
+    if (supabase) return supabase;
+    if (window.supabase && window.supabase.createClient) {
+      supabase = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+    }
+    return supabase;
+  }
 
   // ── State ──
   let currentStep = 1;
@@ -3136,29 +3150,149 @@
     }
   };
 
-  // ── Step 3: Upload sequence ──
-  window.startUploadSequence = function() {
-    document.getElementById('btnStartUpload').disabled = true;
-    document.getElementById('btnStartUpload').textContent = 'Processing...';
+  // ── Step 3: Real Supabase upload ──
+  window.startUploadSequence = async function() {
+    const btn = document.getElementById('btnStartUpload');
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
 
-    // Stage 1: Encryption
-    runStage(1, 'Encrypting...', 'badge-active', 2200, () => {
-      // Stage 2: tus upload
-      runStage(2, 'Uploading...', 'badge-active', 3000, () => {
-        // Stage 3: R2 save
-        runStage(3, 'Saving to R2...', 'badge-active', 1500, () => {
-          // Stage 4: DB log
-          runStage(4, 'Writing to DB...', 'badge-active', 1000, () => {
-            storageKey = 'messages/usr' + Math.floor(Math.random()*9000+1000) + '/msg' + Math.floor(Math.random()*9000+1000) + '/' + (selectedType === 'video' ? 'video.webm' : selectedType === 'audio' ? 'audio.webm' : 'content') + '.enc';
-            document.getElementById('storageKeyDisplay').textContent = storageKey.substring(0, 40) + '...';
-            document.getElementById('uploadDoneMsg').style.display = 'block';
-            document.getElementById('btnNextFromUpload').disabled = false;
-            uploadDone = true;
-          });
-        });
+    const sb = getSupabase();
+    if (!sb) {
+      setStageError('Supabase not loaded. Please refresh and try again.');
+      btn.disabled = false; btn.textContent = 'Begin encryption & upload';
+      return;
+    }
+
+    // Get the recorded blob
+    const blob = recordedBlob || audioBlob || getLetterBlob() || getPhotoBlob();
+    if (!blob) {
+      setStageError('No file found. Please go back and record your message.');
+      btn.disabled = false; btn.textContent = 'Begin encryption & upload';
+      return;
+    }
+
+    // ── Stage 1: AES-256 encryption (browser SubtleCrypto) ──
+    runStageAnim(1, 'Encrypting...');
+    let encryptedBlob, exportedKey, ivHex;
+    try {
+      const key = await crypto.subtle.generateKey({ name: 'AES-CBC', length: 256 }, true, ['encrypt', 'decrypt']);
+      const iv = crypto.getRandomValues(new Uint8Array(16));
+      const raw = await blob.arrayBuffer();
+      const encrypted = await crypto.subtle.encrypt({ name: 'AES-CBC', iv }, key, raw);
+      const exportedKeyData = await crypto.subtle.exportKey('raw', key);
+      exportedKey = Array.from(new Uint8Array(exportedKeyData)).map(b => b.toString(16).padStart(2,'0')).join('');
+      ivHex = Array.from(iv).map(b => b.toString(16).padStart(2,'0')).join('');
+      encryptedBlob = new Blob([encrypted], { type: 'application/octet-stream' });
+      finishStageAnim(1);
+    } catch(err) {
+      setStageError('Encryption failed: ' + err.message);
+      btn.disabled = false; btn.textContent = 'Try again';
+      return;
+    }
+
+    // ── Stage 2: Upload to Supabase Storage ──
+    runStageAnim(2, 'Uploading...');
+    const ext = selectedType === 'video' ? 'webm' : selectedType === 'audio' ? 'webm' : selectedType === 'letter' ? 'pdf' : 'bin';
+    const msgId = 'AG-' + Date.now() + '-' + Math.floor(Math.random()*9000+1000);
+    const filePath = msgId + '/content.' + ext + '.enc';
+    try {
+      const { error: upErr } = await sb.storage.from('messages').upload(filePath, encryptedBlob, {
+        contentType: 'application/octet-stream', upsert: false
       });
-    });
+      if (upErr) throw upErr;
+      storageKey = filePath;
+      finishStageAnim(2);
+    } catch(err) {
+      setStageError('Upload failed: ' + err.message + '. Check your Supabase storage bucket is named "messages".');
+      btn.disabled = false; btn.textContent = 'Try again';
+      return;
+    }
+
+    // ── Stage 3: Confirm saved in Supabase ──
+    runStageAnim(3, 'Saving to Supabase...');
+    await new Promise(r => setTimeout(r, 600));
+    finishStageAnim(3);
+
+    // ── Stage 4: Write record to database ──
+    runStageAnim(4, 'Writing to DB...');
+    try {
+      const { error: dbErr } = await sb.from('messages').insert({
+        sender_name: document.getElementById('senderNameField') ? document.getElementById('senderNameField').value : 'Sender',
+        sender_email: '',
+        recipient_name: '',
+        recipient_email: '',
+        relationship: '',
+        message_type: selectedType,
+        storage_path: filePath,
+        encryption_key: exportedKey,
+        encryption_iv: ivHex,
+        delivery_trigger: 'date',
+        delivery_date: null,
+        delivery_occasion: '',
+        status: 'draft'
+      });
+      if (dbErr) throw dbErr;
+      finishStageAnim(4);
+    } catch(err) {
+      setStageError('Database write failed: ' + err.message + '. Check your Supabase table is named "messages".');
+      btn.disabled = false; btn.textContent = 'Try again';
+      return;
+    }
+
+    // ── All done ──
+    document.getElementById('storageKeyDisplay').textContent = filePath.substring(0, 40) + '...';
+    document.getElementById('uploadDoneMsg').style.display = 'block';
+    document.getElementById('btnNextFromUpload').disabled = false;
+    uploadDone = true;
   };
+
+  function runStageAnim(n, text) {
+    const icon = document.getElementById('stageIcon' + n);
+    const badge = document.getElementById('stageBadge' + n);
+    const wrap = document.getElementById('progressWrap' + n);
+    const fill = document.getElementById('progressFill' + n);
+    icon.classList.add('active');
+    badge.className = 'us-badge badge-active';
+    badge.textContent = text;
+    wrap.style.display = 'block';
+    let pct = 0;
+    const iv = setInterval(() => {
+      pct = Math.min(pct + 3, 90);
+      fill.style.width = pct + '%';
+      if (pct >= 90) clearInterval(iv);
+    }, 80);
+    icon._interval = iv;
+  }
+
+  function finishStageAnim(n) {
+    const icon = document.getElementById('stageIcon' + n);
+    const badge = document.getElementById('stageBadge' + n);
+    const fill = document.getElementById('progressFill' + n);
+    if (icon._interval) clearInterval(icon._interval);
+    fill.style.width = '100%';
+    icon.classList.remove('active');
+    icon.classList.add('done');
+    badge.className = 'us-badge badge-done';
+    badge.textContent = 'Done ✓';
+  }
+
+  function setStageError(msg) {
+    const el = document.getElementById('uploadDoneMsg');
+    el.style.display = 'block';
+    el.innerHTML = '<div style="font-family:\'DM Mono\',monospace;font-size:0.72rem;letter-spacing:0.1em;color:#A32D2D;background:#FCEBEB;padding:0.8rem 1.5rem;display:inline-block">⚠ ' + msg + '</div>';
+  }
+
+  function getLetterBlob() {
+    const txt = document.getElementById('letterText');
+    if (!txt || !txt.value.trim()) return null;
+    return new Blob([txt.value], { type: 'text/plain' });
+  }
+
+  function getPhotoBlob() {
+    const inp = document.getElementById('photoInput');
+    if (!inp || !inp.files || !inp.files[0]) return null;
+    return inp.files[0];
+  }
 
   function runStage(n, activeText, activeBadge, duration, callback) {
     const icon = document.getElementById('stageIcon' + n);
@@ -3242,6 +3376,35 @@
   }
 
   // ── Step 6: DB log ──
+  // ── Save recipient + delivery data to Supabase ──
+  window.saveToSupabase = async function() {
+    const sb = getSupabase();
+    if (!sb || !storageKey) return;
+    const name = document.getElementById('recipientName').value.trim();
+    const email = document.getElementById('recipientEmail').value.trim();
+    const phone = document.getElementById('recipientPhone').value.trim();
+    const rel = document.getElementById('relationship').value;
+    const date = document.getElementById('deliveryDate').value || null;
+    const occasion = document.getElementById('deliveryOccasion').value.trim();
+    const trigger = selectedTrigger;
+    try {
+      await sb.from('messages')
+        .update({
+          recipient_name: name,
+          recipient_email: email,
+          recipient_phone: phone,
+          relationship: rel,
+          delivery_trigger: trigger,
+          delivery_date: date,
+          delivery_occasion: occasion,
+          status: 'stored'
+        })
+        .eq('storage_path', storageKey);
+    } catch(err) {
+      console.error('Supabase update error:', err.message);
+    }
+  };
+
   window.buildDbLog = function() {
     const name = document.getElementById('recipientName') ? document.getElementById('recipientName').value || '—' : '—';
     const email = document.getElementById('recipientEmail') ? document.getElementById('recipientEmail').value || '—' : '—';
@@ -3315,7 +3478,6 @@
 
     <h2>1. Cancellations</h2>
 
-
     <h3>Cancelling within 30 days of your delivery date</h3>
     <p>Cancellations within 30 days of the scheduled delivery date are <strong>not eligible for a refund</strong>, as resources have already been allocated for your delivery. However, you may reschedule the delivery to a future date at no additional charge.</p>
 
@@ -3388,4 +3550,51 @@
       <li>A secure private link to view or download the message</li>
       <li>The occasion or context note you wrote when scheduling (e.g. "On your graduation day")</li>
     </ul>
-    <p>The private link is valid for <strong>30 days</strong>
+    <p>The private link is valid for <strong>30 days</strong> from the delivery date and can be accessed multiple times within that window. After 30 days, the link expires but the content remains accessible through the recipient's AfterGlow account.</p>
+
+    <h3>Video and voice messages</h3>
+    <p>Delivered as a private, password-free streaming link. The recipient can watch or listen directly in their browser — no app download required. They may also download a copy for permanent keeping.</p>
+
+    <h3>Written letters</h3>
+    <p>Delivered as a beautifully formatted PDF, rendered in the AfterGlow house style with your name and the occasion noted on the cover. The recipient receives this as an attachment and as a viewable link.</p>
+
+    <h3>Photo messages</h3>
+    <p>Delivered as a private encrypted gallery — a curated, paginated viewing experience. Each photo can be individually downloaded. The gallery remains accessible through the recipient's AfterGlow account indefinitely.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>2. Delivery timelines</h2>
+    <p><strong>Pan-India (all states and union territories):</strong> Digital delivery is instantaneous. There is no geographic restriction within India. Messages are delivered to any Indian email address at no additional charge.</p>
+    <p><strong>International delivery:</strong> Digital delivery works to any email address worldwide. An additional fee of ₹199 applies for international recipients to cover cross-border infrastructure and compliance costs. There is no delay — international delivery is also instantaneous on the scheduled date.</p>
+    <p><strong>Posthumous delivery:</strong> Once AfterGlow receives and verifies the required documentation (death certificate and notifier confirmation), digital delivery is completed within <strong>7–14 business days</strong>.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>3. Delivery failures and what we do</h2>
+    <p>If a delivery email bounces (because the recipient's email address is no longer active), our system:</p>
+    <ul>
+      <li>Attempts delivery three times over 72 hours</li>
+      <li>Notifies you (the sender) if you are still reachable, so you can update the recipient's contact</li>
+      <li>Holds the message for up to 5 years while attempting to locate an updated contact</li>
+      <li>If delivery remains impossible after 5 years, contacts your estate or designated notifier</li>
+    </ul>
+    <p>We guarantee delivery or a full refund. An undeliverable message is never deleted without your knowledge.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>4. What AfterGlow does not ship</h2>
+    <p>AfterGlow does not currently offer physical item shipping — no letters by post, no couriered gifts or keepsakes. All current services are digital. If physical delivery is introduced in future, this policy will be updated and customers notified in advance.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>5. Contact for delivery queries</h2>
+    <div class="callout">
+      <p>If your recipient has not received their message, or if you have a delivery-related query, write to <strong>support@afterglow.org.in</strong> (Mon–Fri, 9am–6pm IST). Please include your Reference ID. We respond to all delivery queries within 24 hours.</p>
+    </div>
+
+    <p style="margin-top:1.5rem"><strong>Registered office:</strong> AfterGlow (a Kamala Laxmi Enterprise initiative), 131 / 1201, Anantya CHS, Pantnagar, Ghatkopar (E), Mumbai — 400075, Maharashtra, India.</p>
+  </div>
+</div>
+
+</body>
+</html>
