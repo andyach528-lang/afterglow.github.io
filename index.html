@@ -1573,7 +1573,7 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── NAV MOBILE ──
   function toggleNav() {
     document.getElementById('navLinks').classList.toggle('open');
@@ -2322,8 +2322,8 @@
     align-items: center; justify-content: center; position: relative;
     margin-bottom: 1.5rem; overflow: hidden;
   }
-  .video-preview video { width: 100%; height: 100%; object-fit: cover; display: none; }
-  .video-preview video.active { display: block; }
+  .video-preview video { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; position: absolute; top:0; left:0; }
+  .video-preview video.active { opacity: 1; position: relative; }
   .preview-placeholder {
     text-align: center; color: var(--dark-muted);
   }
@@ -2903,7 +2903,7 @@
 </div><!-- end page-studio -->
 
 <!-- ════════════ STUDIO JAVASCRIPT ════════════ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
 (function() {
 
@@ -2991,54 +2991,67 @@
 
   // ── Video recording ──
   window.enableCamera = function() {
+    const btn = document.getElementById('btnEnable');
+    btn.textContent = 'Connecting...';
+    btn.disabled = true;
+
+    // Check if browser supports camera
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      setRecStatus('Camera not supported in this browser. Please use Chrome or Firefox.');
+      setRecStatus('Your browser does not support camera access. Please use Chrome on desktop.');
+      btn.textContent = 'Not supported';
       return;
     }
-    setRecStatus('Requesting camera permission...');
-    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: true })
-      .then(stream => {
+
+    // Request camera + microphone
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then(function(stream) {
         mediaStream = stream;
-        const liveVideo = document.getElementById('liveVideo');
+
+        var liveVideo = document.getElementById('liveVideo');
+        var placeholder = document.getElementById('previewPlaceholder');
+
+        // Attach stream
         liveVideo.srcObject = stream;
-        // Force display before play
-        liveVideo.style.display = 'block';
+        liveVideo.muted = true;
+
+        // Show video, hide placeholder
+        liveVideo.style.opacity = '1';
+        liveVideo.style.position = 'relative';
         liveVideo.classList.add('active');
-        document.getElementById('previewPlaceholder').style.display = 'none';
-        // Explicitly call play() — autoplay attribute alone is not enough in all browsers
-        const playPromise = liveVideo.play();
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              setRecStatus('Camera ready — press Record when you are ready');
-            })
-            .catch(err => {
-              // play() failed — try muted play (some browsers require this)
-              liveVideo.muted = true;
-              liveVideo.play().catch(e => setRecStatus('Could not start camera preview: ' + e.message));
-              setRecStatus('Camera ready — press Record when you are ready');
-            });
-        } else {
-          setRecStatus('Camera ready — press Record when you are ready');
-        }
-        document.getElementById('btnEnable').style.display = 'none';
+        placeholder.style.display = 'none';
+
+        // Play — required on most browsers
+        liveVideo.play()
+          .then(function() {
+            setRecStatus('✓ Camera on — press Record when ready');
+          })
+          .catch(function(e) {
+            setRecStatus('✓ Camera on — press Record when ready');
+          });
+
+        // Show record button
+        btn.style.display = 'none';
         document.getElementById('btnRecord').style.display = 'inline-flex';
         document.getElementById('btnRecord').disabled = false;
       })
-      .catch(err => {
-        let msg = 'Camera access denied. ';
-        if (err.name === 'NotAllowedError') {
-          msg += 'Please click the camera icon in your browser address bar and allow access, then try again.';
-        } else if (err.name === 'NotFoundError') {
-          msg += 'No camera found on this device.';
-        } else if (err.name === 'NotReadableError') {
-          msg += 'Camera is already in use by another app. Close other apps using the camera and try again.';
+      .catch(function(err) {
+        btn.disabled = false;
+        btn.textContent = 'Try again';
+
+        if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+          setRecStatus('⚠ Camera permission denied. Click the camera icon in your browser address bar → Allow → then click Try again.');
+        } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
+          setRecStatus('⚠ No camera found. Please connect a camera and try again.');
+        } else if (err.name === 'NotReadableError' || err.name === 'TrackStartError') {
+          setRecStatus('⚠ Camera is being used by another app (Zoom, Teams etc). Close it and click Try again.');
+        } else if (err.name === 'OverconstrainedError') {
+          // Retry with no constraints
+          navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(function(stream) { window.enableCamera._setupStream(stream); })
+            .catch(function() { setRecStatus('⚠ Could not access camera: ' + err.message); });
         } else {
-          msg += err.message;
+          setRecStatus('⚠ Camera error: ' + err.name + ' — ' + err.message);
         }
-        setRecStatus(msg);
-        document.getElementById('btnEnable').style.display = 'inline-flex';
-        document.getElementById('btnEnable').textContent = 'Try again';
       });
   };
 
@@ -3492,6 +3505,69 @@
 </script>
 
 <!-- ════════════ REFUNDS & CANCELLATIONS ════════════ -->
+<div class="page-overlay" id="page-refunds">
+  <div class="page-nav">
+    <button class="page-back" onclick="closePage()">← Back to AfterGlow</button>
+    <a href="#" class="logo">After<span>Glow</span></a>
+  </div>
+  <div class="page-body">
+    <div class="page-label">✦ Trust &amp; legal</div>
+    <h1>Refunds &amp; cancellations.</h1>
+    <p class="page-date">Last updated: 1 January 2026 · Governing law: India</p>
+
+    <p>We understand that circumstances change. This policy explains clearly when you are entitled to a refund, how to request one, and how long it takes to process. We have designed this policy to be fair to both you and to us — and to comply fully with the requirements of the Reserve Bank of India and Indian consumer protection law.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>1. Cancellations</h2>
+
+    <h3>Cancelling within 30 days of your delivery date</h3>
+    <p>Cancellations within 30 days of the scheduled delivery date are <strong>not eligible for a refund</strong>, as resources have already been allocated for your delivery. However, you may reschedule the delivery to a future date at no additional charge.</p>
+
+    <h3>Posthumous delivery messages</h3>
+    <p>Messages scheduled for delivery upon passing may be cancelled at any time while the sender is alive, subject to the timelines above. Once a posthumous delivery has been triggered and verified, it cannot be cancelled or reversed.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>2. Refunds</h2>
+
+    <h3>When you are entitled to a full refund</h3>
+    <ul>
+      <li>AfterGlow is unable to deliver your message after three attempted deliveries and five years of holding</li>
+      <li>AfterGlow ceases operations (funds held in escrow are returned in full)</li>
+      <li>A technical error on our part results in your message being lost or corrupted</li>
+      <li>Your payment was charged in error or duplicated</li>
+    </ul>
+
+    <h3>Refund timeline</h3>
+    <p>All approved refunds are processed within <strong>5–7 business days</strong> from the date of approval. The refund will be credited to the original payment method used at the time of purchase. UPI and net banking refunds typically reflect within 2–3 business days. Card refunds may take up to 7 business days depending on your bank.</p>
+
+    <h3>How to request a refund</h3>
+    <p>Write to us at <strong>support@afterglow.org.in</strong> with the subject line "Refund Request — [Your Reference ID]". Include your name, the reference ID from your confirmation, and the reason for your request. We will acknowledge your request within 24 hours and process it within 5 business days.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>3. Modifications (not cancellations)</h2>
+    <p>You may modify recipient contact details, the delivery date, or the occasion note at any time up to <strong>30 days before delivery</strong> at no additional cost. Changes to message content (re-recording a video, re-writing a letter) are permitted up to <strong>60 days before delivery</strong>.</p>
+    <p>To modify your message, log into your AfterGlow account or write to <strong>support@afterglow.org.in</strong> with your reference ID.</p>
+
+    <div class="page-divider"></div>
+
+    <h2>4. Non-refundable situations</h2>
+    <ul>
+      <li>The recipient has already received and opened the message</li>
+      <li>Cancellation is requested within 30 days of the delivery date</li>
+      <li>The message was flagged and withheld due to prohibited content (as per our Terms of Service)</li>
+      <li>Incorrect recipient details were provided and the message was delivered to the specified address</li>
+    </ul>
+
+    <div class="callout">
+      <p>For any refund or cancellation query, write to <strong>support@afterglow.org.in</strong> (Mon–Fri, 9am–6pm IST). We will always try to find a fair resolution.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ SHIPPING POLICY ════════════ -->
 <div class="page-overlay" id="page-refunds">
   <div class="page-nav">
     <button class="page-back" onclick="closePage()">← Back to AfterGlow</button>
